@@ -1,0 +1,303 @@
+/* ==========================================================================
+   TẬP LỆNH CSS TÙY BIẾN CHO THIỆP CƯỚI ĐIỆN TỬ (MODERN BEIGE & FLORAL ELEGANCE)
+   ========================================================================== */
+
+/* 1. Thiết lập thanh cuộn trang web sang trọng (Custom Scrollbar) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E0D7C6;
+  border-radius: 9999px;
+  border: 2px solid #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A880;
+}
+
+/* Thanh cuộn cho Sổ lưu bút */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #F7F3EB;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #D4A373;
+  border-radius: 9999px;
+}
+
+/* 2. Hiệu ứng phóng to cực nhẹ cho ảnh nền Hero (Subtle Zoom Animation) */
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtleZoom 25s ease-in-out infinite;
+}
+
+/* =========================================================================
+   3. FLOATING MUSIC PLAYER – NÚT ĐIỀU KHIỂN NHẠC NỀN
+   ========================================================================= */
+
+/* Wrapper cố định góc dưới-trái */
+.music-player-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Nút tròn chính */
+.music-toggle-btn {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(197, 168, 128, 0.45);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 0 0 rgba(197,168,128,0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.16), 0 0 0 5px rgba(197,168,128,0.12);
+}
+
+.music-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Đĩa nhạc trang trí xoay bên trong nút */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.music-disc {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(197, 168, 128, 0.55);
+  animation: spinSlow 8s linear infinite;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+}
+
+/* Khi nhạc tạm dừng thì đĩa ngừng xoay */
+.music-disc.spin-paused {
+  animation-play-state: paused;
+  opacity: 0.3;
+}
+
+/* Icon nốt nhạc */
+.music-note-icon {
+  position: relative;
+  z-index: 2;
+  font-size: 1rem;
+  color: #8b7355;
+  transition: color 0.3s;
+}
+
+/* Khi đang phát: icon đổi màu rose gold */
+.music-toggle-btn.is-playing .music-note-icon {
+  color: #c9856c;
+}
+
+/* Pulse ring khi đang phát */
+@keyframes musicPulse {
+  0%   { box-shadow: 0 0 0 0   rgba(201,133,108, 0.40); }
+  70%  { box-shadow: 0 0 0 10px rgba(201,133,108, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(201,133,108, 0); }
+}
+
+.music-toggle-btn.is-playing {
+  animation: musicPulse 2s ease-out infinite;
+}
+
+/* Tooltip trạng thái */
+.music-tooltip {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197,168,128,0.3);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  color: #5c4a3a;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.music-player-wrap:hover .music-tooltip {
+  display: flex;
+  opacity: 1;
+}
+
+/* Chấm nhấp nháy xanh lá khi đang phát */
+.music-tooltip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #93af87;
+  flex-shrink: 0;
+}
+
+/* Animate-spin-slow (giữ lại để tương thích các nơi dùng cũ) */
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
+.spin-paused {
+  animation-play-state: paused;
+}
+
+/* 4. Tùy chỉnh hiệu ứng làm mờ nền kính (Glassmorphism) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 5. Hiệu ứng viền vàng kim tuyến lấp lánh nhẹ khi hover thẻ */
+.hover-gold-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-gold-glow:hover {
+  box-shadow: 0 15px 35px -5px rgba(197, 168, 128, 0.25), 0 5px 15px rgba(0, 0, 0, 0.04);
+  border-color: rgba(212, 163, 115, 0.6);
+}
+
+/* 6. Timeline line căn chỉnh trên mobile và desktop */
+@media (max-width: 767px) {
+  .timeline-line {
+    left: 18px !important;
+  }
+}
+
+/* 7. Canvas cánh hoa rơi bao phủ toàn màn hình */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* 8. Hiệu ứng gõ chữ và bóng đổ văn bản */
+.text-shadow-soft {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Tinh chỉnh typography cho font chữ uốn lượn */
+.font-calligraphy {
+  font-family: 'Great Vibes', cursive;
+  letter-spacing: 0.02em;
+}
+
+/* Tinh chỉnh hiệu ứng mở Modal */
+#gift-modal.active,
+#lightbox-modal.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+#gift-modal.active > div {
+  transform: scale(1) !important;
+}
+
+
+#toast.show {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* =========================================================================
+   9. BIỂU TƯỢNG THÁNH GIÁ & CHIM BỒ CÂU (BIBLE QUOTE SECTION)
+   ========================================================================= */
+
+/* Hiệu ứng phát sáng + nhấp nháy nhẹ Thánh Giá */
+@keyframes crossGlow {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(197,168,128,0.5), 0 0 16px rgba(197,168,128,0.25);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 14px rgba(197,168,128,0.85), 0 0 30px rgba(197,168,128,0.45);
+    opacity: 0.88;
+  }
+}
+
+.sacred-cross-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.4rem;
+}
+
+.sacred-cross {
+  font-size: 2.4rem;
+  color: #c9a84c;
+  animation: crossGlow 3s ease-in-out infinite;
+}
+
+/* Hiệu ứng bay nhẹ lên xuống + glow cho Chim Bồ Câu */
+@keyframes doveFloat {
+  0%, 100% { transform: translateY(0);   opacity: 0.75; }
+  50%       { transform: translateY(-5px); opacity: 1;   }
+}
+
+.dove-icon {
+  font-size: 1.8rem;
+  color: #b8a898;
+  animation: doveFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(197,168,128,0.5));
+  flex-shrink: 0;
+}
+
+/* Lệch pha nhẹ giữa chim trái và chim phải */
+.dove-left {
+  animation-delay: 0s;
+}
+.dove-right {
+  animation-delay: 0.8s;
+  display: inline-block;
+  transform: scaleX(-1);
+}

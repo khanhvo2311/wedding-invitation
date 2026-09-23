@@ -1,0 +1,26 @@
+# ===================================
+# .gitignore – Wedding Invitation Site
+# ===================================
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (nếu sau này dùng npm)
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# Tệp môi trường (bí mật)
+.env
+.env.local
