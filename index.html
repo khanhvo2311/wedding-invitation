@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thiệp Cưới Online | Võ Quốc Khánh & Nguyễn Thị Trang - Save Our Date</title>
-  
+
   <!-- Thẻ Meta chia sẻ mạng xã hội (Facebook, Zalo, iMessage) -->
-  <meta name="description" content="Trân trọng kính mời quý bạn bè và người thân đến tham dự lễ thành hôn của Võ Quốc Khánh & Nguyễn Thị Trang vào ngày 07.11.2026 tại Mộc Châu.">
+  <meta name="description"
+    content="Trân trọng kính mời quý bạn bè và người thân đến tham dự lễ thành hôn của Võ Quốc Khánh & Nguyễn Thị Trang vào ngày 07.11.2026 tại Mộc Châu.">
   <meta property="og:title" content="Thiệp Cưới Online | Võ Quốc Khánh & Nguyễn Thị Trang">
-  <meta property="og:description" content="Trân trọng kính mời quý bạn bè và người thân đến chung vui cùng gia đình chúng mình!">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:description"
+    content="Trân trọng kính mời quý bạn bè và người thân đến chung vui cùng gia đình chúng mình!">
+  <meta property="og:image" content="images/og-share.jpg">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts: 'Great Vibes' (Uốn lượn), 'Playfair Display' (Cổ điển sang trọng), 'Montserrat' (Hiện đại) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
 
   <!-- FontAwesome 6 (Icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -58,7 +63,9 @@
   <!-- Tệp CSS Tùy biến nâng cao -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-cream text-charcoal font-sans antialiased selection:bg-roseGold selection:text-white relative overflow-x-hidden">
+
+<body
+  class="bg-cream text-charcoal font-sans antialiased selection:bg-roseGold selection:text-white relative overflow-x-hidden">
 
   <!-- Canvas hiệu ứng cánh hoa rơi nhẹ nhàng toàn màn hình -->
   <canvas id="petals-canvas" class="fixed inset-0 pointer-events-none z-30"></canvas>
@@ -66,12 +73,17 @@
   <!-- =========================================================================
        1. THANH ĐIỀU HƯỚNG CỐ ĐỊNH (STICKY GLASSMORPHISM NAVBAR)
        ========================================================================= -->
-  <header id="main-nav" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 px-6 md:px-12 backdrop-blur-md bg-cream/80 border-b border-beigeLight/60">
+  <header id="main-nav"
+    class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 px-6 md:px-12 backdrop-blur-md bg-cream/80 border-b border-beigeLight/60">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <!-- Logo tên đôi uyên ương -->
       <a href="#hero" class="flex items-center gap-2 group">
-        <span class="font-calligraphy text-3xl md:text-4xl text-champagneDark group-hover:text-roseGold transition-colors">K & T</span>
-        <span class="text-xs uppercase tracking-[0.25em] text-slateMuted font-bold hidden sm:inline-block border-l border-champagne/40 pl-3">Wedding Invitation</span>
+        <span
+          class="font-calligraphy text-3xl md:text-4xl text-champagneDark group-hover:text-roseGold transition-colors">K
+          & T</span>
+        <span
+          class="text-xs uppercase tracking-[0.25em] text-slateMuted font-bold hidden sm:inline-block border-l border-champagne/40 pl-3">Wedding
+          Invitation</span>
       </a>
 
       <!-- Menu trên máy tính -->
@@ -81,14 +93,16 @@
         <a href="#events" class="hover:text-roseGold transition-colors">Sự Kiện</a>
         <a href="#gallery" class="hover:text-roseGold transition-colors">Album Ảnh</a>
         <a href="#rsvp" class="hover:text-roseGold transition-colors">Gửi Lời Chúc</a>
-        <button onclick="openGiftModal()" class="px-4 py-2 rounded-full border border-champagne text-champagneDark hover:bg-champagne hover:text-white transition-all duration-300 text-xs tracking-wider font-bold flex items-center gap-1.5 shadow-sm">
+        <button onclick="openGiftModal()"
+          class="px-4 py-2 rounded-full border border-champagne text-champagneDark hover:bg-champagne hover:text-white transition-all duration-300 text-xs tracking-wider font-bold flex items-center gap-1.5 shadow-sm">
           <i class="fa-solid fa-gift text-sm"></i> Mừng Cưới
         </button>
       </nav>
 
       <!-- Nút mở Menu trên Mobile -->
       <div class="flex items-center gap-3 md:hidden">
-        <button onclick="openGiftModal()" class="px-3 py-1.5 rounded-full border border-champagne text-champagneDark text-[11px] uppercase tracking-wider flex items-center gap-1">
+        <button onclick="openGiftModal()"
+          class="px-3 py-1.5 rounded-full border border-champagne text-champagneDark text-[11px] uppercase tracking-wider flex items-center gap-1">
           <i class="fa-solid fa-gift"></i> Mừng Cưới
         </button>
         <button id="mobile-menu-btn" class="text-charcoal p-2 text-xl focus:outline-none" aria-label="Mở menu">
@@ -98,7 +112,8 @@
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 px-4 border-t border-beigeLight/80 mt-3 flex flex-col space-y-3 text-center text-xs uppercase tracking-widest text-charcoal font-bold bg-cream/95 rounded-b-2xl shadow-xl">
+    <div id="mobile-menu"
+      class="hidden md:hidden pt-4 pb-2 px-4 border-t border-beigeLight/80 mt-3 flex flex-col space-y-3 text-center text-xs uppercase tracking-widest text-charcoal font-bold bg-cream/95 rounded-b-2xl shadow-xl">
       <a href="#about" class="mobile-nav-link py-2 hover:text-roseGold">Cặp Đôi</a>
       <a href="#story" class="mobile-nav-link py-2 hover:text-roseGold">Chuyện Tình Yêu</a>
       <a href="#events" class="mobile-nav-link py-2 hover:text-roseGold">Sự Kiện Cưới</a>
@@ -116,10 +131,8 @@
 
   <!-- Nút điều khiển nhạc nền cố định góc dưới trái -->
   <div class="music-player-wrap" id="music-player-wrap">
-    <button id="music-toggle-btn"
-            class="music-toggle-btn"
-            title="Bật / Tắt nhạc nền lãng mạn"
-            aria-label="Bật / Tắt nhạc nền">
+    <button id="music-toggle-btn" class="music-toggle-btn" title="Bật / Tắt nhạc nền lãng mạn"
+      aria-label="Bật / Tắt nhạc nền">
       <!-- Đĩa nhạc xoay -->
       <div id="music-disc-spin" class="music-disc"></div>
       <!-- Icon nốt nhạc -->
@@ -136,18 +149,20 @@
     <!-- =========================================================================
          3. HERO BANNER - BÌA TRÀN MÀN HÌNH VỚI COUNTDOWN & TÊN UYÊN ƯƠNG
          ========================================================================= -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center px-4 pt-24 pb-16 overflow-hidden">
+    <section id="hero"
+      class="relative min-h-screen flex items-center justify-center text-center px-4 pt-24 pb-16 overflow-hidden">
       <!-- Ảnh nền lãng mạn với lớp overlay màu be dịu nhẹ -->
       <div class="absolute inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=85" 
-             alt="Wedding Couple Banner" 
-             class="w-full h-full object-cover object-center filter brightness-[0.92] scale-105 animate-subtle-zoom">
+        <img src="images/hero-banner.jpg" alt="Wedding Couple Banner"
+          class="w-full h-full object-cover object-center filter brightness-[0.92] scale-105 animate-subtle-zoom">
         <div class="absolute inset-0 bg-gradient-to-b from-cream/60 via-cream/40 to-cream"></div>
       </div>
 
       <!-- Khung viền họa tiết hoa trang nhã kiểu Canva Modern -->
-      <div class="relative z-10 max-w-4xl mx-auto py-12 px-6 sm:px-12 rounded-3xl backdrop-blur-md bg-white/50 border border-white/60 shadow-luxury" data-aos="fade-up" data-aos-duration="1200">
-        
+      <div
+        class="relative z-10 max-w-4xl mx-auto py-12 px-6 sm:px-12 rounded-3xl backdrop-blur-md bg-white/50 border border-white/60 shadow-luxury"
+        data-aos="fade-up" data-aos-duration="1200">
+
         <!-- Họa tiết hoa văn vòm phía trên -->
         <div class="flex items-center justify-center gap-3 text-champagne mb-4">
           <span class="h-[1px] w-12 bg-champagne/50"></span>
@@ -181,44 +196,55 @@
           <!-- Chim bồ câu hai bên + câu trích dẫn -->
           <div class="flex items-center gap-4 sm:gap-6 px-2">
             <i class="fa-solid fa-dove dove-icon dove-left" aria-hidden="true"></i>
-            <p class="font-serif italic text-xl sm:text-2xl font-semibold text-charcoal/85 max-w-lg mx-auto text-center leading-relaxed">
+            <p
+              class="font-serif italic text-xl sm:text-2xl font-semibold text-charcoal/85 max-w-lg mx-auto text-center leading-relaxed">
               <em>"Sự gì Thiên Chúa đã kết hợp, loài người không được phân ly"</em>
-              <br><span class="block mt-2 text-sm sm:text-base not-italic text-slateMuted tracking-widest font-medium italic">— Mc 10,9</span>
+              <br><span
+                class="block mt-2 text-sm sm:text-base not-italic text-slateMuted tracking-widest font-medium italic">—
+                Mc 10,9</span>
             </p>
             <i class="fa-solid fa-dove dove-icon dove-right" aria-hidden="true"></i>
           </div>
         </div>
 
         <!-- Ngày tổ chức hôn lễ -->
-        <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 py-2.5 px-6 border-y border-champagne/40 my-4 font-serif tracking-widest uppercase">
-          <span class="text-base sm:text-2xl font-bold text-charcoal">Mộc Châu: <strong class="text-roseGold">07.11.2026</strong></span>
+        <div
+          class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 py-2.5 px-6 border-y border-champagne/40 my-4 font-serif tracking-widest uppercase">
+          <span class="text-base sm:text-2xl font-bold text-charcoal">Mộc Châu: <strong
+              class="text-roseGold">07.11.2026</strong></span>
           <span class="w-1.5 h-1.5 rounded-full bg-roseGold hidden sm:inline-block"></span>
-          <span class="text-base sm:text-2xl font-bold text-charcoal">Mũi Né: <strong class="text-roseGold">13 – 14.11.2026</strong></span>
+          <span class="text-base sm:text-2xl font-bold text-charcoal">Mũi Né: <strong class="text-roseGold">13 –
+              14.11.2026</strong></span>
         </div>
 
         <!-- =========================================================================
              BỘ ĐẾM NGƯỢC THỜI GIAN THỰC (COUNTDOWN TIMER)
              ========================================================================= -->
         <div class="mt-8 mb-6">
-          <p class="text-[11px] uppercase tracking-[0.25em] text-slateMuted font-medium mb-4">Cùng đếm ngược ngày chung đôi</p>
+          <p class="text-[11px] uppercase tracking-[0.25em] text-slateMuted font-medium mb-4">Cùng đếm ngược ngày chung
+            đôi</p>
           <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto">
             <!-- Ngày -->
-            <div class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
+            <div
+              class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
               <span id="days" class="block font-serif text-2xl sm:text-4xl font-bold text-champagneDark">00</span>
               <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted">Ngày</span>
             </div>
             <!-- Giờ -->
-            <div class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
+            <div
+              class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
               <span id="hours" class="block font-serif text-2xl sm:text-4xl font-bold text-champagneDark">00</span>
               <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted">Giờ</span>
             </div>
             <!-- Phút -->
-            <div class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
+            <div
+              class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
               <span id="minutes" class="block font-serif text-2xl sm:text-4xl font-bold text-champagneDark">00</span>
               <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted">Phút</span>
             </div>
             <!-- Giây -->
-            <div class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
+            <div
+              class="bg-white/80 rounded-2xl p-2.5 sm:p-4 border border-beigeLight shadow-card transform hover:-translate-y-1 transition-transform">
               <span id="seconds" class="block font-serif text-2xl sm:text-4xl font-bold text-roseGold">00</span>
               <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted">Giây</span>
             </div>
@@ -227,10 +253,12 @@
 
         <!-- Nút hành động kêu gọi (CTA) -->
         <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
-          <a href="#rsvp" class="px-7 py-3 rounded-full bg-roseGold text-white font-medium text-xs uppercase tracking-widest hover:bg-champagneDark hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+          <a href="#rsvp"
+            class="px-7 py-3 rounded-full bg-roseGold text-white font-medium text-xs uppercase tracking-widest hover:bg-champagneDark hover:shadow-lg transition-all duration-300 flex items-center gap-2">
             <i class="fa-regular fa-envelope"></i> Xác Nhận Tham Dự
           </a>
-          <button onclick="openGiftModal()" class="px-7 py-3 rounded-full bg-white/90 border border-champagne text-champagneDark font-medium text-xs uppercase tracking-widest hover:bg-warmBeige transition-all duration-300 flex items-center gap-2 shadow-sm">
+          <button onclick="openGiftModal()"
+            class="px-7 py-3 rounded-full bg-white/90 border border-champagne text-champagneDark font-medium text-xs uppercase tracking-widest hover:bg-warmBeige transition-all duration-300 flex items-center gap-2 shadow-sm">
             <i class="fa-solid fa-gift text-roseGold"></i> Gửi Quà Mừng Cưới
           </button>
         </div>
@@ -238,7 +266,9 @@
       </div>
 
       <!-- Mũi tên cuộn xuống -->
-      <a href="#about" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-champagne hover:text-roseGold animate-bounce z-10" aria-label="Cuộn xuống">
+      <a href="#about"
+        class="absolute bottom-6 left-1/2 -translate-x-1/2 text-champagne hover:text-roseGold animate-bounce z-10"
+        aria-label="Cuộn xuống">
         <i class="fa-solid fa-angle-down text-2xl"></i>
       </a>
     </section>
@@ -256,60 +286,83 @@
           <span class="h-[1px] w-10 bg-champagne/40"></span>
         </div>
         <p class="font-sans text-sm text-slateMuted max-w-2xl mx-auto mt-4 leading-relaxed">
-          Gặp gỡ nhau giữa biển người mênh mông là một cái duyên, yêu nhau là một sự lựa chọn, và nắm tay nhau đi suốt cuộc đời là lời hẹn ước thiêng liêng nhất của chúng mình.
+          Gặp gỡ nhau giữa biển người mênh mông là một cái duyên, yêu nhau là một sự lựa chọn, và nắm tay nhau đi suốt
+          cuộc đời là lời hẹn ước thiêng liêng nhất của chúng mình.
         </p>
       </div>
 
       <!-- Thẻ thông tin 2 nhân vật chính -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-5xl mx-auto items-stretch">
-        
+
         <!-- Chú Rể -->
-        <div class="bg-white/80 rounded-3xl p-6 sm:p-8 border border-beigeLight shadow-luxury text-center flex flex-col items-center relative overflow-hidden group" data-aos="fade-right">
+        <div
+          class="bg-white/80 rounded-3xl p-6 sm:p-8 border border-beigeLight shadow-luxury text-center flex flex-col items-center relative overflow-hidden group"
+          data-aos="fade-right">
           <!-- Huy hiệu góc hoa văn -->
-          <div class="absolute -top-12 -right-12 w-28 h-28 bg-warmBeige rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
-          
+          <div
+            class="absolute -top-12 -right-12 w-28 h-28 bg-warmBeige rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-500">
+          </div>
+
           <!-- Ảnh Chú Rể -->
-          <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 border-2 border-dashed border-champagne/60 mb-6">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
-                 alt="Chú rể Võ Quốc Khánh" 
-                 class="w-full h-full object-cover rounded-full shadow-md group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute bottom-1 right-3 bg-champagne text-white text-xs px-3 py-1 rounded-full shadow-sm">Chú Rể</span>
+          <div
+            class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 border-2 border-dashed border-champagne/60 mb-6">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+              alt="Chú rể Võ Quốc Khánh"
+              class="w-full h-full object-cover rounded-full shadow-md group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute bottom-1 right-3 bg-champagne text-white text-xs px-3 py-1 rounded-full shadow-sm">Chú
+              Rể</span>
           </div>
 
           <h3 class="font-serif text-2xl text-charcoal font-semibold mb-1">Võ Quốc Khánh</h3>
-          <p class="text-xs uppercase tracking-widest text-slateMuted mb-4">Chàng trai cung Ma Kết</p>
+          <p class="text-xs uppercase tracking-widest text-slateMuted mb-4">Chàng trai cung Nhân Mã</p>
           <p class="font-sans text-sm text-slateMuted leading-relaxed italic mb-6">
-            "Từ ngày có em bước vào cuộc sống, mọi khoảnh khắc đều trở nên ấm áp và có ý nghĩa hơn bao giờ hết. Cảm ơn em vì đã cùng anh viết nên câu chuyện hạnh phúc này."
+            "Từ ngày có em bước vào cuộc sống, mọi khoảnh khắc đều trở nên ấm áp và có ý nghĩa hơn bao giờ hết. Cảm ơn
+            em vì đã cùng anh viết nên câu chuyện hạnh phúc này."
           </p>
 
           <div class="flex items-center gap-3 text-champagne text-sm mt-auto">
-            <a href="#" class="w-8 h-8 rounded-full border border-champagne/40 flex items-center justify-center hover:bg-champagne hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="w-8 h-8 rounded-full border border-champagne/40 flex items-center justify-center hover:bg-champagne hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"
+              class="w-8 h-8 rounded-full border border-champagne/40 flex items-center justify-center hover:bg-champagne hover:text-white transition-colors"><i
+                class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"
+              class="w-8 h-8 rounded-full border border-champagne/40 flex items-center justify-center hover:bg-champagne hover:text-white transition-colors"><i
+                class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
 
         <!-- Cô Dâu -->
-        <div class="bg-white/80 rounded-3xl p-6 sm:p-8 border border-beigeLight shadow-luxury text-center flex flex-col items-center relative overflow-hidden group" data-aos="fade-left">
+        <div
+          class="bg-white/80 rounded-3xl p-6 sm:p-8 border border-beigeLight shadow-luxury text-center flex flex-col items-center relative overflow-hidden group"
+          data-aos="fade-left">
           <!-- Huy hiệu góc hoa văn -->
-          <div class="absolute -top-12 -left-12 w-28 h-28 bg-sageLight/50 rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
+          <div
+            class="absolute -top-12 -left-12 w-28 h-28 bg-sageLight/50 rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-500">
+          </div>
 
           <!-- Ảnh Cô Dâu -->
-          <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 border-2 border-dashed border-roseGold/60 mb-6">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" 
-                 alt="Cô dâu Nguyễn Thị Trang" 
-                 class="w-full h-full object-cover rounded-full shadow-md group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute bottom-1 right-3 bg-roseGold text-white text-xs px-3 py-1 rounded-full shadow-sm">Cô Dâu</span>
+          <div
+            class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full p-2 border-2 border-dashed border-roseGold/60 mb-6">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80"
+              alt="Cô dâu Nguyễn Thị Trang"
+              class="w-full h-full object-cover rounded-full shadow-md group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute bottom-1 right-3 bg-roseGold text-white text-xs px-3 py-1 rounded-full shadow-sm">Cô
+              Dâu</span>
           </div>
 
           <h3 class="font-serif text-2xl text-charcoal font-semibold mb-1">Nguyễn Thị Trang</h3>
           <p class="text-xs uppercase tracking-widest text-slateMuted mb-4">Cô gái cung Thiên Bình</p>
           <p class="font-sans text-sm text-slateMuted leading-relaxed italic mb-6">
-            "Em luôn tin rằng điều đẹp đẽ nhất trên thế gian là gặp đúng người vào đúng thời điểm. Cảm ơn anh đã luôn kiên nhẫn, yêu thương và bảo bọc em trong suốt những năm tháng qua."
+            "Em luôn tin rằng điều đẹp đẽ nhất trên thế gian là gặp đúng người vào đúng thời điểm. Cảm ơn anh đã luôn
+            kiên nhẫn, yêu thương và bảo bọc em trong suốt những năm tháng qua."
           </p>
 
           <div class="flex items-center gap-3 text-roseGold text-sm mt-auto">
-            <a href="#" class="w-8 h-8 rounded-full border border-roseGold/40 flex items-center justify-center hover:bg-roseGold hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="w-8 h-8 rounded-full border border-roseGold/40 flex items-center justify-center hover:bg-roseGold hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"
+              class="w-8 h-8 rounded-full border border-roseGold/40 flex items-center justify-center hover:bg-roseGold hover:text-white transition-colors"><i
+                class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"
+              class="w-8 h-8 rounded-full border border-roseGold/40 flex items-center justify-center hover:bg-roseGold hover:text-white transition-colors"><i
+                class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
 
@@ -322,7 +375,7 @@
     <section id="story" class="py-20 px-4 bg-warmBeige/60 relative overflow-hidden">
       <!-- Background floral elements -->
       <div class="max-w-5xl mx-auto">
-        
+
         <div class="text-center mb-16" data-aos="fade-up">
           <span class="text-xs uppercase tracking-[0.3em] text-sage font-semibold">Chặng đường bên nhau</span>
           <h2 class="font-serif text-3xl sm:text-4xl text-charcoal mt-2 mb-3">Câu Chuyện Tình Yêu</h2>
@@ -339,26 +392,32 @@
         <!-- Dòng thời gian Timeline dọc đối xứng -->
         <div class="relative wrap overflow-hidden p-2 sm:p-6 h-full">
           <!-- Đường line kẻ giữa timeline -->
-          <div class="timeline-line absolute border-opacity-30 border-champagne h-full border-2 left-4 md:left-1/2 -ml-[1px]"></div>
+          <div
+            class="timeline-line absolute border-opacity-30 border-champagne h-full border-2 left-4 md:left-1/2 -ml-[1px]">
+          </div>
 
           <!-- MỐC 1: Lần đầu gặp gỡ -->
           <div class="mb-12 flex flex-col md:flex-row items-center w-full relative" data-aos="fade-up">
             <!-- Icon chấm tròn ở giữa -->
-            <div class="z-20 flex items-center order-1 bg-champagne shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
+            <div
+              class="z-20 flex items-center order-1 bg-champagne shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
               <i class="fa-regular fa-comment-dots"></i>
             </div>
             <!-- Nội dung bên Trái (Desktop) -->
             <div class="order-1 w-full md:w-1/2 pl-12 md:pl-0 md:pr-10 text-left md:text-right">
-              <div class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
-                <span class="inline-block px-3 py-1 rounded-full bg-warmBeige text-champagneDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng 09 / 2021</span>
+              <div
+                class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-warmBeige text-champagneDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng
+                  09 / 2021</span>
                 <h3 class="font-serif text-xl font-bold text-charcoal mb-2">Lần Đầu Gặp Gỡ</h3>
                 <p class="text-sm text-slateMuted leading-relaxed mb-4">
-                  Một buổi chiều thu dịu dàng tại góc quán cà phê quen thuộc. Cái nhìn đầu tiên ngập ngừng nhưng đủ để khiến hai trái tim rung lên những nhịp đập bồi hồi khó quên.
+                  Một buổi chiều thu dịu dàng tại góc quán cà phê quen thuộc. Cái nhìn đầu tiên ngập ngừng nhưng đủ để
+                  khiến hai trái tim rung lên những nhịp đập bồi hồi khó quên.
                 </p>
                 <div class="rounded-xl overflow-hidden h-40 w-full">
-                  <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" 
-                       alt="Lần đầu gặp gỡ" 
-                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                  <img src="images/story-1.jpg" alt="Lần đầu gặp gỡ"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                 </div>
               </div>
             </div>
@@ -368,22 +427,26 @@
           <!-- MỐC 2: Nói lời yêu -->
           <div class="mb-12 flex flex-col md:flex-row items-center w-full relative" data-aos="fade-up">
             <!-- Icon chấm tròn ở giữa -->
-            <div class="z-20 flex items-center order-1 bg-roseGold shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
+            <div
+              class="z-20 flex items-center order-1 bg-roseGold shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
               <i class="fa-solid fa-heart"></i>
             </div>
             <div class="order-1 w-full md:w-1/2 hidden md:block"></div>
             <!-- Nội dung bên Phải (Desktop) -->
             <div class="order-1 w-full md:w-1/2 pl-12 md:pl-10 text-left">
-              <div class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
-                <span class="inline-block px-3 py-1 rounded-full bg-sageLight text-sageDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng 02 / 2022</span>
+              <div
+                class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-sageLight text-sageDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng
+                  02 / 2022</span>
                 <h3 class="font-serif text-xl font-bold text-charcoal mb-2">Nói Lời Yêu Thương</h3>
                 <p class="text-sm text-slateMuted leading-relaxed mb-4">
-                  Dưới ánh hoàng hôn rực rỡ bên hồ, những lời chân thành nhất được thốt lên. Chúng mình chính thức bắt đầu hành trình cùng nhau sẻ chia buồn vui trong cuộc sống.
+                  Dưới ánh hoàng hôn rực rỡ bên hồ, những lời chân thành nhất được thốt lên. Chúng mình chính thức bắt
+                  đầu hành trình cùng nhau sẻ chia buồn vui trong cuộc sống.
                 </p>
                 <div class="rounded-xl overflow-hidden h-40 w-full">
-                  <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=600&q=80" 
-                       alt="Nói lời yêu" 
-                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                  <img src="images/story-2.jpg" alt="Nói lời yêu"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                 </div>
               </div>
             </div>
@@ -392,21 +455,25 @@
           <!-- MỐC 3: Lời cầu hôn -->
           <div class="mb-12 flex flex-col md:flex-row items-center w-full relative" data-aos="fade-up">
             <!-- Icon chấm tròn ở giữa -->
-            <div class="z-20 flex items-center order-1 bg-champagneDark shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
+            <div
+              class="z-20 flex items-center order-1 bg-champagneDark shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
               <i class="fa-solid fa-gem"></i>
             </div>
             <!-- Nội dung bên Trái (Desktop) -->
             <div class="order-1 w-full md:w-1/2 pl-12 md:pl-0 md:pr-10 text-left md:text-right">
-              <div class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
-                <span class="inline-block px-3 py-1 rounded-full bg-warmBeige text-champagneDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng 10 / 2025</span>
+              <div
+                class="bg-white p-6 rounded-2xl border border-beigeLight shadow-card hover:shadow-luxury transition-shadow">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-warmBeige text-champagneDark text-xs font-semibold uppercase tracking-wider mb-2">Tháng
+                  10 / 2025</span>
                 <h3 class="font-serif text-xl font-bold text-charcoal mb-2">Lời Cầu Hôn</h3>
                 <p class="text-sm text-slateMuted leading-relaxed mb-4">
-                  Trong chuyến đi Đà Lạt mộng mơ, giữa ngàn hoa và ánh nến lung linh, anh đã quỳ gối trao em chiếc nhẫn đính ước. Nụ cười rạng rỡ và câu nói "Em đồng ý" là món quà vô giá nhất.
+                  Trong chuyến đi Đà Lạt mộng mơ, giữa ngàn hoa và ánh nến lung linh, anh đã quỳ gối trao em chiếc nhẫn
+                  đính ước. Nụ cười rạng rỡ và câu nói "Em đồng ý" là món quà vô giá nhất.
                 </p>
                 <div class="rounded-xl overflow-hidden h-40 w-full">
-                  <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80" 
-                       alt="Lời cầu hôn" 
-                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                  <img src="images/story-3.jpg" alt="Lời cầu hôn"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                 </div>
               </div>
             </div>
@@ -416,22 +483,26 @@
           <!-- MỐC 4: Ngày chung đôi -->
           <div class="flex flex-col md:flex-row items-center w-full relative" data-aos="fade-up">
             <!-- Icon chấm tròn ở giữa -->
-            <div class="z-20 flex items-center order-1 bg-roseGold shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
+            <div
+              class="z-20 flex items-center order-1 bg-roseGold shadow-md w-9 h-9 rounded-full absolute left-0 md:left-1/2 -translate-x-1/2 justify-center text-white text-xs">
               <i class="fa-solid fa-champagne-glasses"></i>
             </div>
             <div class="order-1 w-full md:w-1/2 hidden md:block"></div>
             <!-- Nội dung bên Phải (Desktop) -->
             <div class="order-1 w-full md:w-1/2 pl-12 md:pl-10 text-left">
-              <div class="bg-white p-6 rounded-2xl border-2 border-roseGold/40 shadow-card hover:shadow-luxury transition-shadow">
-                <span class="inline-block px-3 py-1 rounded-full bg-roseGold text-white text-xs font-semibold uppercase tracking-wider mb-2">07 Tháng 11 / 2026</span>
+              <div
+                class="bg-white p-6 rounded-2xl border-2 border-roseGold/40 shadow-card hover:shadow-luxury transition-shadow">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-roseGold text-white text-xs font-semibold uppercase tracking-wider mb-2">07
+                  Tháng 11 / 2026</span>
                 <h3 class="font-serif text-xl font-bold text-charcoal mb-2">Ngày Chung Đôi</h3>
                 <p class="text-sm text-slateMuted leading-relaxed mb-4">
-                  Khoảnh khắc thiêng liêng khi chúng mình chính thức gọi nhau là "bạn đời" trước sự chứng kiến và chúc phúc của hai bên gia đình cùng những người thân thương nhất.
+                  Khoảnh khắc thiêng liêng khi chúng mình chính thức gọi nhau là "bạn đời" trước sự chứng kiến và chúc
+                  phúc của hai bên gia đình cùng những người thân thương nhất.
                 </p>
                 <div class="rounded-xl overflow-hidden h-40 w-full">
-                  <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" 
-                       alt="Ngày chung đôi" 
-                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                  <img src="images/story-4.jpg" alt="Ngày chung đôi"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                 </div>
               </div>
             </div>
@@ -461,19 +532,23 @@
 
       <!-- 2 Cards song song: Lễ Vu Quy (Nhà Gái) & Lễ Cưới (Nhà Trai) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        
+
         <!-- CARD 1: LỄ VU QUY (TIỆC NHÀ GÁI - MỘC CHÂU) -->
-        <div class="bg-white/90 rounded-3xl p-8 border border-champagne/30 shadow-luxury flex flex-col justify-between relative overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="bg-white/90 rounded-3xl p-8 border border-champagne/30 shadow-luxury flex flex-col justify-between relative overflow-hidden group"
+          data-aos="fade-up" data-aos-delay="100">
           <div class="absolute top-0 right-0 w-32 h-32 bg-warmBeige rounded-bl-full -z-0 opacity-60"></div>
-          
+
           <div class="relative z-10">
             <!-- Icon tiêu đề -->
-            <div class="w-14 h-14 rounded-2xl bg-warmBeige flex items-center justify-center text-champagneDark text-2xl mb-6 shadow-sm">
+            <div
+              class="w-14 h-14 rounded-2xl bg-warmBeige flex items-center justify-center text-champagneDark text-2xl mb-6 shadow-sm">
               <i class="fa-solid fa-house-chimney-heart"></i>
             </div>
 
             <h3 class="font-serif text-2xl sm:text-3xl text-charcoal font-bold mb-1">Lễ Vu Quy</h3>
-            <p class="text-xs uppercase tracking-widest text-roseGold mb-6 font-semibold">Tiệc Mừng Nhà Gái • Mộc Châu</p>
+            <p class="text-xs uppercase tracking-widest text-roseGold mb-6 font-semibold">Tiệc Mừng Nhà Gái • Mộc Châu
+            </p>
 
             <!-- Thời gian & Địa điểm -->
             <div class="space-y-4 mb-8 text-sm text-charcoal">
@@ -507,26 +582,28 @@
 
           <!-- Các nút hành động: Maps & Calendar -->
           <div class="relative z-10 pt-4 border-t border-beigeLight flex flex-wrap gap-3">
-            <a href="https://www.google.com/maps/search/?api=1&query=Bản+Long+Phú,+Phường+Mộc+Châu,+Sơn+La" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="flex-1 min-w-[140px] py-2.5 px-4 rounded-xl bg-champagne text-white text-xs font-medium tracking-wider text-center hover:bg-champagneDark transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+            <a href="https://www.google.com/maps/search/?api=1&query=Bản+Long+Phú,+Phường+Mộc+Châu,+Sơn+La"
+              target="_blank" rel="noopener noreferrer"
+              class="flex-1 min-w-[140px] py-2.5 px-4 rounded-xl bg-champagne text-white text-xs font-medium tracking-wider text-center hover:bg-champagneDark transition-colors flex items-center justify-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-map-location-dot"></i> Xem chỉ đường Google Maps
             </a>
-            <button onclick="addToCalendar('vuquy')" 
-                    class="flex-1 min-w-[130px] py-2.5 px-4 rounded-xl border border-champagne/60 text-champagneDark text-xs font-medium tracking-wider text-center hover:bg-warmBeige transition-colors flex items-center justify-center gap-1.5">
+            <button onclick="addToCalendar('vuquy')"
+              class="flex-1 min-w-[130px] py-2.5 px-4 rounded-xl border border-champagne/60 text-champagneDark text-xs font-medium tracking-wider text-center hover:bg-warmBeige transition-colors flex items-center justify-center gap-1.5">
               <i class="fa-regular fa-calendar-plus"></i> Thêm Vào Lịch
             </button>
           </div>
         </div>
 
         <!-- CARD 2: LỄ CƯỚI & LỄ GIA TIÊN (TIỆC NHÀ TRAI - MŨI NÉ) -->
-        <div class="bg-white/90 rounded-3xl p-8 border border-roseGold/40 shadow-luxury flex flex-col justify-between relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+        <div
+          class="bg-white/90 rounded-3xl p-8 border border-roseGold/40 shadow-luxury flex flex-col justify-between relative overflow-hidden group"
+          data-aos="fade-up" data-aos-delay="200">
           <div class="absolute top-0 right-0 w-32 h-32 bg-sageLight rounded-bl-full -z-0 opacity-40"></div>
 
           <div class="relative z-10">
             <!-- Icon tiêu đề -->
-            <div class="w-14 h-14 rounded-2xl bg-sageLight flex items-center justify-center text-sageDark text-2xl mb-6 shadow-sm">
+            <div
+              class="w-14 h-14 rounded-2xl bg-sageLight flex items-center justify-center text-sageDark text-2xl mb-6 shadow-sm">
               <i class="fa-solid fa-church"></i>
             </div>
 
@@ -541,7 +618,8 @@
                 <div>
                   <strong class="block text-charcoal font-semibold">Lễ Cưới tại Nhà Thờ</strong>
                   <span class="text-xs text-roseGold font-medium block">17:30 | Thứ Sáu, Ngày 13/11/2026</span>
-                  <span class="text-slateMuted text-xs leading-relaxed block mt-0.5">Địa điểm: Nhà thờ Giáo xứ Mũi Né</span>
+                  <span class="text-slateMuted text-xs leading-relaxed block mt-0.5">Địa điểm: Nhà thờ Giáo xứ Mũi
+                    Né</span>
                 </div>
               </div>
 
@@ -550,8 +628,10 @@
                 <i class="fa-solid fa-house-chimney text-champagneDark text-base mt-0.5"></i>
                 <div>
                   <strong class="block text-charcoal font-semibold">Lễ Gia Tiên tại Tư Gia</strong>
-                  <span class="text-xs text-champagneDark font-medium block">08:30 Sáng | Thứ Bảy, Ngày 14/11/2026</span>
-                  <span class="text-slateMuted text-xs leading-relaxed block mt-0.5">Địa điểm: 70/9 đường Hồ Xuân Hương, Phường Mũi Né, Tỉnh Lâm Đồng</span>
+                  <span class="text-xs text-champagneDark font-medium block">08:30 Sáng | Thứ Bảy, Ngày
+                    14/11/2026</span>
+                  <span class="text-slateMuted text-xs leading-relaxed block mt-0.5">Địa điểm: 70/9 đường Hồ Xuân Hương,
+                    Phường Mũi Né, Tỉnh Lâm Đồng</span>
                 </div>
               </div>
 
@@ -568,14 +648,13 @@
 
           <!-- Các nút hành động: Maps & Calendar -->
           <div class="relative z-10 pt-4 border-t border-beigeLight flex flex-wrap gap-3">
-            <a href="https://www.google.com/maps/search/?api=1&query=70/9+đường+Hồ+Xuân+Hương,+phường+Mũi+Né,+tỉnh+Lâm+Đồng" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="flex-1 min-w-[140px] py-2.5 px-4 rounded-xl bg-roseGold text-white text-xs font-medium tracking-wider text-center hover:bg-champagneDark transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+            <a href="https://www.google.com/maps/search/?api=1&query=70/9+đường+Hồ+Xuân+Hương,+phường+Mũi+Né,+tỉnh+Lâm+Đồng"
+              target="_blank" rel="noopener noreferrer"
+              class="flex-1 min-w-[140px] py-2.5 px-4 rounded-xl bg-roseGold text-white text-xs font-medium tracking-wider text-center hover:bg-champagneDark transition-colors flex items-center justify-center gap-1.5 shadow-sm">
               <i class="fa-solid fa-map-location-dot"></i> Xem chỉ đường Google Maps
             </a>
-            <button onclick="addToCalendar('muine')" 
-                    class="flex-1 min-w-[130px] py-2.5 px-4 rounded-xl border border-roseGold/60 text-roseGold text-xs font-medium tracking-wider text-center hover:bg-warmBeige transition-colors flex items-center justify-center gap-1.5">
+            <button onclick="addToCalendar('muine')"
+              class="flex-1 min-w-[130px] py-2.5 px-4 rounded-xl border border-roseGold/60 text-roseGold text-xs font-medium tracking-wider text-center hover:bg-warmBeige transition-colors flex items-center justify-center gap-1.5">
               <i class="fa-regular fa-calendar-plus"></i> Thêm Vào Lịch
             </button>
           </div>
@@ -589,7 +668,7 @@
          ========================================================================= -->
     <section id="gallery" class="py-20 px-4 bg-warmBeige/40 relative">
       <div class="max-w-6xl mx-auto">
-        
+
         <div class="text-center mb-16" data-aos="fade-up">
           <span class="text-xs uppercase tracking-[0.3em] text-sage font-semibold">Khoảnh khắc đáng nhớ</span>
           <h2 class="font-serif text-3xl sm:text-4xl text-charcoal mt-2 mb-3">Album Ảnh Cưới</h2>
@@ -599,89 +678,109 @@
             <span class="h-[1px] w-10 bg-champagne/40"></span>
           </div>
           <p class="font-sans text-sm text-slateMuted max-w-xl mx-auto mt-4">
-            Mỗi tấm ảnh là một kỷ niệm ngọt ngào ghi dấu tình yêu của chúng mình trên mọi chặng đường. Bấm vào ảnh để xem chi tiết nhé!
+            Mỗi tấm ảnh là một kỷ niệm ngọt ngào ghi dấu tình yêu của chúng mình trên mọi chặng đường. Bấm vào ảnh để
+            xem chi tiết nhé!
           </p>
         </div>
 
         <!-- Lưới ảnh Bento / Masonry nghệ thuật kiểu Canva -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          
+
           <!-- Ảnh 1 (Lớn) -->
-          <div class="col-span-2 row-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(0)" data-aos="zoom-in">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" 
-                 alt="Ảnh cưới 1" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 min-h-[300px] md:min-h-[440px]">
-            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <span class="text-white text-sm font-serif italic flex items-center gap-2"><i class="fa-solid fa-expand"></i> Lời hẹn ước trăm năm</span>
+          <div
+            class="col-span-2 row-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(0)" data-aos="zoom-in">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+              alt="Ảnh cưới 1"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 min-h-[300px] md:min-h-[440px]">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span class="text-white text-sm font-serif italic flex items-center gap-2"><i
+                  class="fa-solid fa-expand"></i> Lời hẹn ước trăm năm</span>
             </div>
           </div>
 
           <!-- Ảnh 2 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(1)" data-aos="zoom-in" data-aos-delay="100">
-            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 2" 
-                 class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(1)" data-aos="zoom-in" data-aos-delay="100">
+            <img src="images/story-4.jpg" alt="Ảnh cưới 2"
+              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
 
           <!-- Ảnh 3 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(2)" data-aos="zoom-in" data-aos-delay="150">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 3" 
-                 class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(2)" data-aos="zoom-in" data-aos-delay="150">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
+              alt="Ảnh cưới 3"
+              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
 
           <!-- Ảnh 4 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(3)" data-aos="zoom-in" data-aos-delay="200">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 4" 
-                 class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(3)" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80"
+              alt="Ảnh cưới 4"
+              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
 
           <!-- Ảnh 5 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(4)" data-aos="zoom-in" data-aos-delay="250">
-            <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 5" 
-                 class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(4)" data-aos="zoom-in" data-aos-delay="250">
+            <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80"
+              alt="Ảnh cưới 5"
+              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
 
           <!-- Ảnh 6 -->
-          <div class="col-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(5)" data-aos="zoom-in" data-aos-delay="300">
-            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1000&q=80" 
-                 alt="Ảnh cưới 6" 
-                 class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <span class="text-white text-sm font-serif italic"><i class="fa-solid fa-expand mr-1"></i> Nắm tay em đi khắp muôn nơi</span>
+          <div
+            class="col-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(5)" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1000&q=80"
+              alt="Ảnh cưới 6"
+              class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span class="text-white text-sm font-serif italic"><i class="fa-solid fa-expand mr-1"></i> Nắm tay em đi
+                khắp muôn nơi</span>
             </div>
           </div>
 
           <!-- Ảnh 7 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(6)" data-aos="zoom-in" data-aos-delay="350">
-            <img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 7" 
-                 class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(6)" data-aos="zoom-in" data-aos-delay="350">
+            <img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=600&q=80"
+              alt="Ảnh cưới 7"
+              class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
 
           <!-- Ảnh 8 -->
-          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card" onclick="openLightbox(7)" data-aos="zoom-in" data-aos-delay="400">
-            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" 
-                 alt="Ảnh cưới 8" 
-                 class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
+          <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
+            onclick="openLightbox(7)" data-aos="zoom-in" data-aos-delay="400">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80"
+              alt="Ảnh cưới 8"
+              class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
@@ -704,22 +803,23 @@
           <span class="h-[1px] w-10 bg-champagne/40"></span>
         </div>
         <p class="font-sans text-sm text-slateMuted max-w-xl mx-auto mt-4">
-          Để công tác tiếp đón được chu đáo nhất, xin quý khách vui lòng gửi thông tin xác nhận tham dự trước ngày <strong>01/11/2026</strong>.
+          Để công tác tiếp đón được chu đáo nhất, xin quý khách vui lòng gửi thông tin xác nhận tham dự trước ngày
+          <strong>01/11/2026</strong>.
         </p>
       </div>
 
       <!-- Khung Form sang trọng -->
       <div class="bg-white/90 rounded-3xl p-6 sm:p-10 border border-beigeLight shadow-luxury" data-aos="fade-up">
         <form id="rsvp-form" onsubmit="handleRSVPSubmit(event)" class="space-y-6">
-          
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <!-- Họ và tên -->
             <div>
               <label for="guest-name" class="block text-xs uppercase tracking-wider text-charcoal font-semibold mb-2">
                 Họ và tên của bạn <span class="text-roseGold">*</span>
               </label>
-              <input type="text" id="guest-name" required placeholder="Ví dụ: Nguyễn Văn An" 
-                     class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
+              <input type="text" id="guest-name" required placeholder="Ví dụ: Nguyễn Văn An"
+                class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
             </div>
 
             <!-- Số điện thoại -->
@@ -727,8 +827,8 @@
               <label for="guest-phone" class="block text-xs uppercase tracking-wider text-charcoal font-semibold mb-2">
                 Số điện thoại liên hệ
               </label>
-              <input type="tel" id="guest-phone" placeholder="Ví dụ: 0912 345 678" 
-                     class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
+              <input type="tel" id="guest-phone" placeholder="Ví dụ: 0912 345 678"
+                class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
             </div>
           </div>
 
@@ -738,8 +838,8 @@
               <label for="guest-side" class="block text-xs uppercase tracking-wider text-charcoal font-semibold mb-2">
                 Bạn là khách mời của ai? <span class="text-roseGold">*</span>
               </label>
-              <select id="guest-side" required 
-                      class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
+              <select id="guest-side" required
+                class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
                 <option value="Nhà Trai (Quốc Khánh)">Khách mời Nhà Trai (Quốc Khánh)</option>
                 <option value="Nhà Gái (Thị Trang)">Khách mời Nhà Gái (Thị Trang)</option>
                 <option value="Bạn chung cả hai">Bạn chung của cả hai</option>
@@ -751,8 +851,8 @@
               <label for="guest-count" class="block text-xs uppercase tracking-wider text-charcoal font-semibold mb-2">
                 Số lượng người tham dự <span class="text-roseGold">*</span>
               </label>
-              <select id="guest-count" required 
-                      class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
+              <select id="guest-count" required
+                class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm">
                 <option value="1 người (Tôi sẽ đi một mình)">1 người (Tôi sẽ đi một mình)</option>
                 <option value="2 người (Tôi và người thương)">2 người (Tôi và người thương)</option>
                 <option value="Cả gia đình">Cả gia đình (Gồm con nhỏ)</option>
@@ -767,13 +867,19 @@
               Bạn sẽ tham dự cùng chúng mình tại đâu? <span class="text-roseGold">*</span>
             </label>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-cream border border-beigeLight hover:border-champagne cursor-pointer transition-all has-[:checked]:border-champagne has-[:checked]:bg-warmBeige">
-                <input type="checkbox" name="rsvp-event" value="Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn La)" class="w-4 h-4 text-roseGold accent-roseGold rounded focus:ring-roseGold" checked>
-                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn La)</span>
+              <label
+                class="flex items-center gap-3 p-3.5 rounded-2xl bg-cream border border-beigeLight hover:border-champagne cursor-pointer transition-all has-[:checked]:border-champagne has-[:checked]:bg-warmBeige">
+                <input type="checkbox" name="rsvp-event" value="Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn La)"
+                  class="w-4 h-4 text-roseGold accent-roseGold rounded focus:ring-roseGold" checked>
+                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn
+                  La)</span>
               </label>
-              <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-cream border border-beigeLight hover:border-champagne cursor-pointer transition-all has-[:checked]:border-champagne has-[:checked]:bg-warmBeige">
-                <input type="checkbox" name="rsvp-event" value="Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm Đồng)" class="w-4 h-4 text-roseGold accent-roseGold rounded focus:ring-roseGold">
-                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm Đồng)</span>
+              <label
+                class="flex items-center gap-3 p-3.5 rounded-2xl bg-cream border border-beigeLight hover:border-champagne cursor-pointer transition-all has-[:checked]:border-champagne has-[:checked]:bg-warmBeige">
+                <input type="checkbox" name="rsvp-event" value="Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm Đồng)"
+                  class="w-4 h-4 text-roseGold accent-roseGold rounded focus:ring-roseGold">
+                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm
+                  Đồng)</span>
               </label>
             </div>
             <p class="text-[11px] text-slateMuted mt-1.5 italic">* Bạn có thể tích chọn một hoặc cả hai nơi tham dự.</p>
@@ -784,14 +890,15 @@
             <label for="guest-wishes" class="block text-xs uppercase tracking-wider text-charcoal font-semibold mb-2">
               Lời chúc phúc dành cho đôi uyên ương <span class="text-roseGold">*</span>
             </label>
-            <textarea id="guest-wishes" rows="4" required placeholder="Gửi những lời chúc ấm áp nhất đến Quốc Khánh & Thị Trang tại đây..." 
-                      class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm"></textarea>
+            <textarea id="guest-wishes" rows="4" required
+              placeholder="Gửi những lời chúc ấm áp nhất đến Quốc Khánh & Thị Trang tại đây..."
+              class="w-full px-4 py-3 rounded-2xl bg-cream border border-beigeLight focus:border-champagne focus:ring-1 focus:ring-champagne outline-none transition-all text-sm"></textarea>
           </div>
 
           <!-- Nút Gửi Form -->
           <div class="text-center pt-2">
-            <button type="submit" id="submit-btn" 
-                    class="px-10 py-3.5 rounded-full bg-champagne text-white font-medium text-xs uppercase tracking-widest hover:bg-champagneDark hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 mx-auto">
+            <button type="submit" id="submit-btn"
+              class="px-10 py-3.5 rounded-full bg-champagne text-white font-medium text-xs uppercase tracking-widest hover:bg-champagneDark hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 mx-auto">
               <i class="fa-solid fa-paper-plane"></i> Gửi Xác Nhận & Lời Chúc
             </button>
           </div>
@@ -805,7 +912,9 @@
           <h3 class="font-serif text-2xl text-charcoal font-bold flex items-center gap-2">
             <i class="fa-regular fa-comment-heart text-roseGold"></i> Sổ Lưu Bút Yêu Thương
           </h3>
-          <span id="wishes-count" class="text-xs uppercase tracking-wider text-slateMuted bg-warmBeige px-3 py-1 rounded-full">0 lời chúc</span>
+          <span id="wishes-count"
+            class="text-xs uppercase tracking-wider text-slateMuted bg-warmBeige px-3 py-1 rounded-full">0 lời
+            chúc</span>
         </div>
 
         <!-- Danh sách lời chúc hiển thị từ LocalStorage -->
@@ -821,7 +930,8 @@
          ========================================================================= -->
     <footer class="py-16 px-4 bg-warmBeige/80 text-center relative border-t border-beigeLight">
       <div class="max-w-2xl mx-auto space-y-4">
-        <span class="font-calligraphy text-4xl sm:text-5xl text-champagneDark block">Võ Quốc Khánh & Nguyễn Thị Trang</span>
+        <span class="font-calligraphy text-4xl sm:text-5xl text-champagneDark block">Võ Quốc Khánh & Nguyễn Thị
+          Trang</span>
         <p class="font-serif italic text-sm text-charcoal/80">
           "Cảm ơn bạn đã luôn đồng hành và là một phần đặc biệt trong ngày trọng đại của chúng mình tại Mộc Châu!"
         </p>
@@ -835,16 +945,20 @@
   <!-- =========================================================================
        10. POPUP MODAL: HỘP MỪNG CƯỚI & MÃ QR NGÂN HÀNG (GIFT MODAL)
        ========================================================================= -->
-  <div id="gift-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-cream w-full max-w-lg rounded-3xl border border-champagne/40 shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
-      
+  <div id="gift-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    <div
+      class="bg-cream w-full max-w-lg rounded-3xl border border-champagne/40 shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+
       <!-- Nút đóng Modal -->
-      <button onclick="closeGiftModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/80 border border-beigeLight text-slateMuted hover:text-charcoal hover:bg-white flex items-center justify-center transition-colors">
+      <button onclick="closeGiftModal()"
+        class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/80 border border-beigeLight text-slateMuted hover:text-charcoal hover:bg-white flex items-center justify-center transition-colors">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
 
       <div class="text-center mb-6">
-        <span class="w-12 h-12 rounded-full bg-warmBeige flex items-center justify-center text-roseGold text-xl mx-auto mb-3">
+        <span
+          class="w-12 h-12 rounded-full bg-warmBeige flex items-center justify-center text-roseGold text-xl mx-auto mb-3">
           <i class="fa-solid fa-gift"></i>
         </span>
         <h3 class="font-serif text-2xl sm:text-3xl text-charcoal font-bold">Mừng Cưới Cô Dâu & Chú Rể</h3>
@@ -854,17 +968,18 @@
       </div>
 
       <!-- Thẻ QR Duy nhất của Đôi Uyên Ương -->
-      <div class="bg-white rounded-3xl p-6 border border-champagne/30 shadow-card text-center flex flex-col items-center">
-        
+      <div
+        class="bg-white rounded-3xl p-6 border border-champagne/30 shadow-card text-center flex flex-col items-center">
+
         <!-- Khung ảnh QR Code VietQR tải trực tiếp từ tệp qr-bank.jpg -->
-        <div class="w-60 h-60 sm:w-68 sm:h-68 bg-cream rounded-2xl p-2.5 border border-beigeLight mb-5 flex items-center justify-center overflow-hidden shadow-inner">
-          <img src="qr-bank.jpg" 
-               alt="Mã QR Mừng Cưới" 
-               class="w-full h-full object-contain rounded-xl"
-               onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=102876452304-VIETINBANK-NGUYENTHITRANG';">
+        <div
+          class="w-60 h-60 sm:w-68 sm:h-68 bg-cream rounded-2xl p-2.5 border border-beigeLight mb-5 flex items-center justify-center overflow-hidden shadow-inner">
+          <img src="qr-bank.jpg" alt="Mã QR Mừng Cưới" class="w-full h-full object-contain rounded-xl"
+            onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=102876452304-VIETINBANK-NGUYENTHITRANG';">
         </div>
 
-        <div class="text-left w-full space-y-2 text-xs sm:text-sm text-slateMuted mb-5 bg-warmBeige/50 p-4 rounded-2xl border border-beigeLight/60">
+        <div
+          class="text-left w-full space-y-2 text-xs sm:text-sm text-slateMuted mb-5 bg-warmBeige/50 p-4 rounded-2xl border border-beigeLight/60">
           <p class="flex justify-between items-center border-b border-beigeLight/60 pb-1.5">
             <span>Ngân hàng:</span>
             <strong class="text-charcoal font-semibold text-right">VietinBank</strong>
@@ -875,7 +990,8 @@
           </p>
           <p class="flex justify-between items-center border-b border-beigeLight/60 pb-1.5">
             <span>Số tài khoản:</span>
-            <strong id="wedding-acc" class="text-roseGold font-bold text-base sm:text-lg tracking-wider">102876452304</strong>
+            <strong id="wedding-acc"
+              class="text-roseGold font-bold text-base sm:text-lg tracking-wider">102876452304</strong>
           </p>
           <p class="flex justify-between items-center">
             <span>Chủ tài khoản:</span>
@@ -884,8 +1000,8 @@
         </div>
 
         <!-- Nút sao chép STK -->
-        <button onclick="copyToClipboard('102876452304', this)" 
-                class="w-full py-3 px-5 rounded-2xl bg-champagne hover:bg-champagneDark text-white text-xs font-semibold tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
+        <button onclick="copyToClipboard('102876452304', this)"
+          class="w-full py-3 px-5 rounded-2xl bg-champagne hover:bg-champagneDark text-white text-xs font-semibold tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
           <i class="fa-regular fa-copy"></i> <span>Sao chép số tài khoản</span>
         </button>
       </div>
@@ -900,22 +1016,26 @@
   <!-- =========================================================================
        11. POPUP LIGHTBOX XEM ẢNH TOÀN MÀN HÌNH (PHOTO LIGHTBOX)
        ========================================================================= -->
-  <div id="lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/95 p-4 hidden opacity-0 transition-opacity duration-300">
+  <div id="lightbox-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/95 p-4 hidden opacity-0 transition-opacity duration-300">
     <!-- Nút đóng -->
     <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-white text-2xl z-50 p-2">
       <i class="fa-solid fa-xmark"></i>
     </button>
     <!-- Nút Lùi ảnh -->
-    <button onclick="prevLightboxImage()" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl p-3 z-50 focus:outline-none">
+    <button onclick="prevLightboxImage()"
+      class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl p-3 z-50 focus:outline-none">
       <i class="fa-solid fa-chevron-left"></i>
     </button>
     <!-- Khung ảnh lớn -->
     <div class="max-w-4xl max-h-[85vh] flex flex-col items-center justify-center">
-      <img id="lightbox-img" src="" alt="Full view" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-all duration-300">
+      <img id="lightbox-img" src="" alt="Full view"
+        class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-all duration-300">
       <p id="lightbox-caption" class="text-white/80 font-serif italic text-sm mt-3 text-center"></p>
     </div>
     <!-- Nút Tiếp theo -->
-    <button onclick="nextLightboxImage()" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl p-3 z-50 focus:outline-none">
+    <button onclick="nextLightboxImage()"
+      class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl p-3 z-50 focus:outline-none">
       <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>
@@ -923,8 +1043,10 @@
   <!-- =========================================================================
        12. THÔNG BÁO TOAST THÀNH CÔNG (TOAST NOTIFICATION)
        ========================================================================= -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
-    <div class="bg-white/95 backdrop-blur-md border border-champagne text-charcoal px-5 py-3.5 rounded-2xl shadow-luxury flex items-center gap-3">
+  <div id="toast"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div
+      class="bg-white/95 backdrop-blur-md border border-champagne text-charcoal px-5 py-3.5 rounded-2xl shadow-luxury flex items-center gap-3">
       <span class="w-8 h-8 rounded-full bg-warmBeige text-champagneDark flex items-center justify-center">
         <i class="fa-solid fa-check"></i>
       </span>
@@ -944,4 +1066,5 @@
   <!-- Tệp mã nguồn JavaScript chính -->
   <script src="script.js"></script>
 </body>
+
 </html>

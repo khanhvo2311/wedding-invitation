@@ -28,35 +28,35 @@ const WEDDING_CONFIG = {
    ========================================================================== */
 const GALLERY_IMAGES = [
   {
-    url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85",
+    url: "images/gallery-1.jpg",
     caption: "Lời hẹn ước trăm năm - Hoàng hôn ngọt ngào"
   },
   {
-    url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-2.jpg",
     caption: "Nụ cười rạng rỡ trong ngày vui trọng đại"
   },
   {
-    url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-3.jpg",
     caption: "Khoảnh khắc dịu dàng bên nhau"
   },
   {
-    url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-4.jpg",
     caption: "Cùng nhau ngắm nhìn tương lai phía trước"
   },
   {
-    url: "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-5.jpg",
     caption: "Chiếc váy cưới trắng tinh khôi và nụ cười hạnh phúc"
   },
   {
-    url: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1600&q=85",
+    url: "images/gallery-6.jpg",
     caption: "Nắm tay em đi qua mọi cung đường yêu thương"
   },
   {
-    url: "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-7.jpg",
     caption: "Góc phố quen - Nơi bắt đầu một câu chuyện đẹp"
   },
   {
-    url: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=85",
+    url: "images/gallery-8.jpg",
     caption: "Và chúng mình sẽ luôn mỉm cười như ngày hôm nay"
   }
 ];
