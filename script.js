@@ -516,11 +516,14 @@ function handleRSVPSubmit(event) {
   event.preventDefault();
 
   const nameInput = document.getElementById("guest-name");
+  const phoneInput = document.getElementById("guest-phone");
   const sideInput = document.getElementById("guest-side");
   const countInput = document.getElementById("guest-count");
   const wishesInput = document.getElementById("guest-wishes");
+  const submitBtn = document.getElementById("submit-btn");
 
   const name = nameInput ? nameInput.value.trim() : "";
+  const phone = phoneInput ? phoneInput.value.trim() : "";
   const side = sideInput ? sideInput.value : "";
   const count = countInput ? countInput.value : "";
   const wishes = wishesInput ? wishesInput.value.trim() : "";
@@ -533,38 +536,67 @@ function handleRSVPSubmit(event) {
     return;
   }
 
-  // Tạo lời chúc mới
-  const newWish = {
-    name: name,
-    side: side,
-    count: count,
-    events: selectedEvents.length > 0 ? selectedEvents : ["Chưa chọn địa điểm"],
-    wishes: wishes,
-    time: "Vừa xong"
-  };
-
-  const currentList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  currentList.unshift(newWish); // Thêm lên đầu danh sách
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
-
-  // Bắn pháo hoa giấy chúc mừng (Confetti)
-  if (typeof confetti === "function") {
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ["#D4A373", "#C5A880", "#8F9779", "#F7F3EB"]
-    });
+  // Đổi trạng thái nút gửi
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
   }
 
-  // Hiển thị thông báo Toast
-  showToast("Cảm ơn bạn!", `Võ Quốc Khánh & Nguyễn Thị Trang đã nhận được lời chúc từ ${name}!`);
+  const payload = {
+    name: name,
+    phone: phone,
+    weddingParty: side + (selectedEvents.length > 0 ? (" - " + selectedEvents.join(', ')) : ""),
+    guests: count,
+    message: wishes
+  };
 
-  // Reset Form
-  document.getElementById("rsvp-form").reset();
+  fetch("https://script.google.com/macros/s/AKfycbw9p62pw-cHWpVgb9fzFoUQoYpHpM_0s3tzAd0OrLCtwqp4F5vO6Hx3tAZCgSTycg/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    // Vẫn lưu vào localstorage để hiển thị trên web
+    const newWish = {
+      name: name,
+      side: side,
+      count: count,
+      events: selectedEvents.length > 0 ? selectedEvents : ["Chưa chọn địa điểm"],
+      wishes: wishes,
+      time: "Vừa xong"
+    };
 
-  // Cập nhật lại danh sách trên màn hình
-  renderWishes();
+    const currentList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    currentList.unshift(newWish);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
+
+    // Bắn pháo hoa giấy chúc mừng (Confetti)
+    if (typeof confetti === "function") {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#D4A373", "#C5A880", "#8F9779", "#F7F3EB"]
+      });
+    }
+
+    showToast("Cảm ơn bạn!", "Cảm ơn bạn đã xác nhận tham dự!");
+    document.getElementById("rsvp-form").reset();
+    renderWishes();
+  })
+  .catch(error => {
+    console.error("Lỗi khi gửi form:", error);
+    showToast("Có lỗi xảy ra", "Vui lòng thử lại sau.");
+  })
+  .finally(() => {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Xác Nhận & Lời Chúc';
+    }
+  });
 }
 
 function escapeHTML(str) {
