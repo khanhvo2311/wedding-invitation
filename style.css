@@ -280,24 +280,68 @@
 
 /* Hiệu ứng bay nhẹ lên xuống + glow cho Chim Bồ Câu */
 @keyframes doveFloat {
-  0%, 100% { transform: translateY(0);   opacity: 0.75; }
-  50%       { transform: translateY(-5px); opacity: 1;   }
+  0%, 100% { transform: translateY(0);    opacity: 0.80; }
+  50%       { transform: translateY(-6px); opacity: 1;   }
 }
 
+/* Keyframe riêng cho chim bên phải: kết hợp scaleX(-1) + translateY */
+@keyframes doveFloatRight {
+  0%, 100% { transform: scaleX(-1) translateY(0);    opacity: 0.80; }
+  50%       { transform: scaleX(-1) translateY(-6px); opacity: 1;   }
+}
+
+/* Con chim bên trái (mặt hướng phải, vào chữ) */
 .dove-icon {
-  font-size: 1.8rem;
-  color: #b8a898;
-  animation: doveFloat 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(197,168,128,0.5));
+  display: inline-block;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(197,168,128,0.55));
 }
 
-/* Lệch pha nhẹ giữa chim trái và chim phải */
 .dove-left {
+  animation: doveFloat 4s ease-in-out infinite;
   animation-delay: 0s;
 }
+
+/* Con chim bên phải: scaleX(-1) được xử lý trong keyframe riêng */
 .dove-right {
+  animation: doveFloatRight 4s ease-in-out infinite;
   animation-delay: 0.8s;
-  display: inline-block;
-  transform: scaleX(-1);
+  transform: scaleX(-1); /* fallback khi animation chưa chạy */
+}
+
+/* 10. NAV RESPONSIVE – chống ngắt chữ, tự co giãn theo màn hình */
+#main-nav nav a {
+  white-space: nowrap;
+  font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+  letter-spacing: clamp(0.05em, 0.15vw, 0.2em);
+}
+
+#main-nav nav {
+  gap: clamp(0.75rem, 1.5vw, 2rem);
+}
+
+/* Ở màn hình trung bình (md → lg) thu nhỏ padding header */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #main-nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #main-nav > div {
+    gap: 0.5rem;
+  }
+
+  #main-nav nav {
+    gap: clamp(0.5rem, 1.2vw, 1.2rem);
+  }
+
+  #main-nav nav a {
+    font-size: clamp(0.55rem, 0.7vw, 0.7rem);
+    letter-spacing: 0.08em;
+  }
+
+  #main-nav nav button {
+    font-size: clamp(0.55rem, 0.7vw, 0.7rem);
+    padding: 0.3rem 0.6rem;
+  }
 }
