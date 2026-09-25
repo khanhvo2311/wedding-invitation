@@ -386,10 +386,39 @@ function closeGiftModal() {
 // Đóng modal khi bấm ra ngoài vùng nội dung
 window.addEventListener("click", (e) => {
   const giftModal = document.getElementById("gift-modal");
+  const contactModal = document.getElementById("contact-modal");
   if (e.target === giftModal) {
     closeGiftModal();
   }
+  if (e.target === contactModal) {
+    closeContactModal();
+  }
 });
+
+/* ==========================================================================
+   6.5. HỘP LIÊN HỆ THIẾT KẾ THIỆP (CONTACT MODAL)
+   ========================================================================== */
+function openContactModal() {
+  const modal = document.getElementById("contact-modal");
+  if (!modal) return;
+
+  modal.classList.remove("hidden");
+  setTimeout(() => {
+    modal.classList.add("active");
+  }, 10);
+  document.body.style.overflow = "hidden";
+}
+
+function closeContactModal() {
+  const modal = document.getElementById("contact-modal");
+  if (!modal) return;
+
+  modal.classList.remove("active");
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }, 300);
+}
 
 // Sao chép số tài khoản vào bộ nhớ tạm (Clipboard)
 function copyToClipboard(text, btnElement) {
