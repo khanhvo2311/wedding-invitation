@@ -187,7 +187,7 @@
         <a href="#events" class="hover:text-roseGold transition-colors whitespace-nowrap">Sự Kiện</a>
         <a href="#gallery" class="hover:text-roseGold transition-colors whitespace-nowrap">Album Ảnh</a>
         <a href="#rsvp" class="hover:text-roseGold transition-colors whitespace-nowrap">Gửi Lời Chúc</a>
-        <a href="javascript:void(0)" onclick="openContactModal()"
+        <a href="javascript:void(0)" id="contact-nav-btn"
           class="hover:text-roseGold transition-colors whitespace-nowrap">LIÊN HỆ</a>
         <button onclick="openGiftModal()"
           class="whitespace-nowrap px-4 py-2 rounded-full border border-champagne text-champagneDark hover:bg-champagne hover:text-white transition-all duration-300 tracking-wider font-bold flex items-center gap-1.5 shadow-sm"
@@ -216,7 +216,7 @@
       <a href="#events" class="mobile-nav-link py-2 hover:text-roseGold">Sự Kiện Cưới</a>
       <a href="#gallery" class="mobile-nav-link py-2 hover:text-roseGold">Album Ảnh</a>
       <a href="#rsvp" class="mobile-nav-link py-2 hover:text-roseGold">Xác Nhận Tham Dự</a>
-      <a href="javascript:void(0)" onclick="openContactModal()"
+      <a href="javascript:void(0)" id="contact-mobile-nav-btn"
         class="mobile-nav-link py-2 hover:text-roseGold whitespace-nowrap">LIÊN HỆ</a>
     </div>
   </header>
@@ -1085,7 +1085,8 @@
                 class="flex items-center gap-3 p-3.5 rounded-2xl bg-cream border border-beigeLight hover:border-champagne cursor-pointer transition-all has-[:checked]:border-champagne has-[:checked]:bg-warmBeige">
                 <input type="checkbox" name="rsvp-event" value="Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm Đồng)"
                   class="w-4 h-4 text-roseGold accent-roseGold rounded focus:ring-roseGold">
-                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm
+                <span class="text-xs sm:text-sm text-charcoal font-medium">Tiệc Nhà Trai (Lễ Cưới & Tiệc Cưới - Mũi Né,
+                  Lâm
                   Đồng)</span>
               </label>
             </div>
@@ -1152,7 +1153,7 @@
         </p>
         <div class="pt-2">
           <p class="text-xs text-slateMuted font-medium mb-1">Tư vấn & Thiết kế thiệp cưới online riêng biệt</p>
-          <a href="javascript:void(0)" onclick="openContactModal()"
+          <a href="javascript:void(0)" id="contact-footer-btn"
             class="text-sm font-semibold text-charcoal hover:text-roseGold transition-colors inline-flex items-center gap-1.5">
             <i class="fa-solid fa-phone"></i> Zalo / Hotline: Khánh Võ - 0917647036
           </a>
@@ -1236,12 +1237,12 @@
        10.5. POPUP MODAL: LIÊN HỆ THIẾT KẾ THIẾP (CONTACT MODAL)
        ========================================================================= -->
   <div id="contact-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4">
     <div
       class="bg-cream w-full max-w-lg rounded-3xl border border-champagne/40 shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 text-center">
 
       <!-- Nút đóng Modal -->
-      <button onclick="closeContactModal()"
+      <button id="close-contact-modal"
         class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/80 border border-beigeLight text-slateMuted hover:text-charcoal hover:bg-white flex items-center justify-center transition-colors">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
