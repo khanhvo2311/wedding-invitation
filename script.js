@@ -74,6 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Khởi động bìa thiệp trước (khóa cuộn, chờ người dùng mở)
+  initWeddingCover();
+
   // Khởi động các tính năng
   initCountdown();
   initPetalsCanvas();
@@ -680,4 +683,65 @@ function initMobileMenu() {
       menu.classList.add("hidden");
     });
   });
+}
+
+/* ==========================================================================
+   11. MÀN HÌNH BÌA THIỆP CƯỚI (INVITATION COVER ENVELOPE)
+   ========================================================================= */
+function initWeddingCover() {
+  const cover = document.getElementById("wedding-cover");
+  if (!cover) return;
+
+  // Khoá cuộn trang khi bìa thiệp đang hiển thị
+  document.body.style.overflow = "hidden";
+
+  /* ── Hàm mở thiệp ── */
+  function openInvitation() {
+    // 1. Bắt đầu animation biến mất (fade-out + slide-up)
+    cover.classList.add("is-closing");
+
+    // 2. Phát nhạc nền ngay lập tức (bỏ qua autoplay restriction
+    //    vì đây là hành động trực tiếp của người dùng)
+    const bgMusic = document.getElementById("bg-music");
+    if (bgMusic) {
+      bgMusic.play()
+        .then(() => {
+          // Cập nhật UI nút nhạc về trạng thái đang phát
+          const btn  = document.getElementById("music-toggle-btn");
+          const disc = document.getElementById("music-disc-spin");
+          const icon = document.getElementById("music-icon");
+          const text = document.getElementById("music-status-text");
+
+          if (btn)  btn.classList.add("is-playing");
+          if (disc) disc.classList.remove("spin-paused");
+          if (icon) icon.className = "fa-solid fa-compact-disc music-note-icon";
+          if (text) text.textContent = "Đang phát nhạc";
+        })
+        .catch(() => {
+          // Trình duyệt vẫn từ chối – sẽ được xử lý bởi autoplay listener
+          console.log("Autoplay bị từ chối – người dùng cần tương tác thêm.");
+        });
+    }
+
+    // 3. Sau khi animation kết thúc (850ms) → ẩn hoàn toàn + cho phép cuộn
+    setTimeout(() => {
+      cover.style.display = "none";
+      document.body.style.overflow = "";   // Mở khoá cuộn trang
+    }, 900); // thêm 50ms đệm an toàn
+  }
+
+  /* ── Bắt sự kiện Click / Touch ── */
+  cover.addEventListener("click", openInvitation, { once: true });
+  cover.addEventListener("touchend", (e) => {
+    e.preventDefault(); // Chặn ghost click trên mobile
+    openInvitation();
+  }, { once: true, passive: false });
+
+  /* ── Phím tắt: Enter hoặc Space ── */
+  cover.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openInvitation();
+    }
+  }, { once: true });
 }
