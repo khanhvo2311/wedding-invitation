@@ -229,8 +229,19 @@
 
 /* Tinh chỉnh typography cho font chữ uốn lượn */
 .font-calligraphy {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Great Vibes', 'Alex Brush', cursive, serif;
   letter-spacing: 0.02em;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', 'Times New Roman', serif;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.font-sans {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
 /* Tinh chỉnh hiệu ứng mở Modal */

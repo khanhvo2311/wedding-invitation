@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi" class="scroll-smooth fonts-loading">
 
 <head>
+  <!-- 1. Khởi tạo kết nối sớm tới server chứa font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- 2. Nạp font với tham số display=swap để nạp song song cực nhanh -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Meta Tag cơ bản -->
@@ -32,9 +38,14 @@
   <!-- Google Fonts: 'Great Vibes' (Uốn lượn), 'Playfair Display' (Cổ điển sang trọng), 'Montserrat' (Hiện đại) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
-    rel="stylesheet">
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap">
+  </noscript>
 
   <!-- FontAwesome 6 (Icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -61,9 +72,9 @@
             slateMuted: '#718096',    /* Chữ ghi mờ */
           },
           fontFamily: {
-            calligraphy: ['"Great Vibes"', 'cursive'],
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Montserrat"', 'sans-serif'],
+            calligraphy: ['"Great Vibes"', '"Alex Brush"', 'cursive', 'serif'],
+            serif: ['"Playfair Display"', '"Times New Roman"', 'serif'],
+            sans: ['"Montserrat"', 'system-ui', 'sans-serif'],
           },
           boxShadow: {
             'luxury': '0 10px 30px -5px rgba(197, 168, 128, 0.15), 0 8px 16px -6px rgba(0, 0, 0, 0.05)',
@@ -73,6 +84,24 @@
       }
     }
   </script>
+
+  <!-- Critical CSS: Ẩn font nghệ thuật cho đến khi Google Fonts tải xong (chống FOUT) -->
+  <style>
+    /* Khi font chưa tải: ẩn các phần tử dùng font nghệ thuật để tránh nhấp nháy */
+    .fonts-loading .font-calligraphy,
+    .fonts-loading .cover-couple-name,
+    .fonts-loading .cover-wax-text {
+      opacity: 0;
+    }
+
+    /* Khi font đã tải: hiện lại mượt mà */
+    .fonts-loaded .font-calligraphy,
+    .fonts-loaded .cover-couple-name,
+    .fonts-loaded .cover-wax-text {
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out;
+    }
+  </style>
 
   <!-- Tệp CSS Tùy biến nâng cao -->
   <link rel="stylesheet" href="style.css">
@@ -1346,6 +1375,25 @@
 
   <!-- Thư viện Canvas Confetti (Hiệu ứng pháo hoa giấy chúc mừng khi gửi RSVP) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Script chống FOUT: Reveal font nghệ thuật khi đã tải xong -->
+  <script>
+      (function () {
+        var html = document.documentElement;
+        // Khi tất cả font đã tải xong → xóa 'fonts-loading', thêm 'fonts-loaded'
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () {
+            html.classList.remove('fonts-loading');
+            html.classList.add('fonts-loaded');
+          });
+        }
+        // Fallback: nếu font tải quá 3 giây → vẫn hiện nội dung
+        setTimeout(function () {
+          html.classList.remove('fonts-loading');
+          html.classList.add('fonts-loaded');
+        }, 1500);
+      })();
+  </script>
 
   <!-- Tệp mã nguồn JavaScript chính -->
   <script src="script.js"></script>
