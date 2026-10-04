@@ -684,17 +684,17 @@ function addToCalendar(eventType) {
   let endDate = "";
 
   if (eventType === "vuquy") {
-    title = "[Lễ Vu Quy] Võ Quốc Khánh & Nguyễn Thị Trang";
-    details = "Trân trọng kính mời quý khách đến dự Lễ Vu Quy của chúng mình tại Mộc Châu, Sơn La!";
+    title = "[Lễ Vu Quy & Lễ Cưới] Võ Quốc Khánh & Nguyễn Thị Trang";
+    details = "Lễ Cưới tại Nhà Thờ (19:30 05/11), Lễ Dạm Ngõ & Ăn Hỏi (06/11), Tiệc Cưới Mừng Nhà Gái (09:00 - 12:00 07/11/2026) tại Mộc Châu, Sơn La. Trân trọng kính mời quý khách!";
     location = "Bản Long Phú, Phường Mộc Châu, Tỉnh Sơn La";
-    startDate = "20261107T030000Z"; // 10:00 GMT+7 = 03:00 UTC
-    endDate = "20261107T060000Z";   // 13:00 GMT+7 = 06:00 UTC
+    startDate = "20261107T020000Z"; // 09:00 GMT+7 = 02:00 UTC
+    endDate = "20261107T050000Z";   // 12:00 GMT+7 = 05:00 UTC
   } else {
-    title = "[Lễ Cưới & Gia Tiên] Võ Quốc Khánh & Nguyễn Thị Trang";
-    details = "Lễ cưới tại Nhà thờ Giáo xứ Mũi Né (17h30 ngày 13/11/2026) & Lễ Gia Tiên tại tư gia (08h30 ngày 14/11/2026). Trân trọng kính mời quý khách!";
-    location = "70/9 đường Hồ Xuân Hương, Phường Mũi Né, Tỉnh Lâm Đồng";
-    startDate = "20261113T103000Z"; // 17:30 ngày 13/11 GMT+7 = 10:30 UTC
-    endDate = "20261114T050000Z";   // 12:00 ngày 14/11 GMT+7 = 05:00 UTC
+    title = "[Lễ Thành Hôn & Lễ Gia Tiên] Võ Quốc Khánh & Nguyễn Thị Trang";
+    details = "Tiệc Cưới & Lễ Gia Tiên tại Nhà Hàng Hoàng Phát 2 (17:30 ngày 14/11/2026). Trân trọng kính mời quý khách!";
+    location = "Nhà Hàng Hoàng Phát 2 - 281B Nguyễn Đình Chiểu, Phường Mũi Né, Tỉnh Lâm Đồng";
+    startDate = "20261114T103000Z"; // 17:30 ngày 14/11 GMT+7 = 10:30 UTC
+    endDate = "20261114T140000Z";   // 21:00 ngày 14/11 GMT+7 = 14:00 UTC
   }
 
   // Mở Google Calendar link trực tiếp
