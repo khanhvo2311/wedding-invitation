@@ -90,16 +90,85 @@
     /* Khi font chưa tải: ẩn các phần tử dùng font nghệ thuật để tránh nhấp nháy */
     .fonts-loading .font-calligraphy,
     .fonts-loading .cover-couple-name,
-    .fonts-loading .cover-wax-text {
+    .fonts-loading .cover-wax-text,
+    .fonts-loading .saint-name,
+    .fonts-loading .family-role {
       opacity: 0;
     }
 
     /* Khi font đã tải: hiện lại mượt mà */
     .fonts-loaded .font-calligraphy,
     .fonts-loaded .cover-couple-name,
-    .fonts-loaded .cover-wax-text {
+    .fonts-loaded .cover-wax-text,
+    .fonts-loaded .saint-name,
+    .fonts-loaded .family-role {
       opacity: 1;
       transition: opacity 0.4s ease-in-out;
+    }
+
+    /* Bố cục xếp lớp Tên Thánh & Thứ Bậc uyên ương Hero */
+    .couple-name-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .name-block {
+      position: relative;
+      display: inline-block;
+      padding: 0.6rem 2rem 0.2rem;
+      max-width: 100%;
+    }
+
+    .saint-name {
+      position: absolute;
+      top: -8px;
+      left: -1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #967448;
+      /* Màu vàng đồng đậm nét, sang trọng, hài hòa với tên chính */
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .family-role {
+      position: absolute;
+      top: -8px;
+      right: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A0766A;
+      /* Tông màu ấm thanh lịch, cân xứng tự nhiên */
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 640px) {
+      .name-block {
+        padding: 0.5rem 1.25rem 0.2rem;
+      }
+
+      .saint-name {
+        top: -9px;
+        left: 0.4rem;
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+      }
+
+      .family-role {
+        top: -9px;
+        right: 0.4rem;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
     }
   </style>
 
@@ -332,17 +401,27 @@
 
         <p class="font-serif italic text-base sm:text-lg text-slateMuted mb-2">Hôn lễ của chúng mình</p>
 
-        <!-- Tên Chú Rể & Cô Dâu uốn lượn nghệ thuật theo 3 dòng riêng biệt -->
-        <h1 class="my-4 sm:my-6 drop-shadow-sm flex flex-col items-center justify-center">
-          <span class="font-calligraphy text-5xl sm:text-7xl md:text-8xl text-champagneDark leading-tight block">
-            Võ Quốc Khánh
-          </span>
+        <!-- Tên Chú Rể & Cô Dâu uốn lượn nghệ thuật với Tên Thánh & Thứ Bậc -->
+        <h1 class="couple-name-wrapper my-4 sm:my-6 drop-shadow-sm flex flex-col items-center justify-center">
+          <!-- Khối tên Chú Rể: PHÊRÔ-->
+          <div class="name-block">
+            <span class="saint-name">PHÊRÔ</span>
+            <span class="font-calligraphy text-5xl sm:text-7xl md:text-8xl text-champagneDark leading-tight block">
+              Võ Quốc Khánh
+            </span>
+          </div>
+
           <span class="font-serif text-3xl sm:text-5xl text-roseGold my-1 sm:my-2 block text-center font-normal">
             &amp;
           </span>
-          <span class="font-calligraphy text-5xl sm:text-7xl md:text-8xl text-champagneDark leading-tight block">
-            Nguyễn Thị Trang
-          </span>
+
+          <!-- Khối tên Cô Dâu: CECILIA-->
+          <div class="name-block">
+            <span class="saint-name">CECILIA</span>
+            <span class="font-calligraphy text-5xl sm:text-7xl md:text-8xl text-champagneDark leading-tight block">
+              Nguyễn Thị Trang
+            </span>
+          </div>
         </h1>
 
         <!-- Câu Trích Dẫn Thánh Kinh với biểu tượng Thánh Giá & Chim Bồ Câu -->
@@ -980,8 +1059,7 @@
           <div
             class="col-span-2 row-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(0)" data-aos="zoom-in">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
-              alt="Ảnh cưới 1"
+            <img src="images/anh-cuoi-1.jpg" alt="Ảnh cưới 1"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 min-h-[300px] md:min-h-[440px]">
             <div
               class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -993,7 +1071,8 @@
           <!-- Ảnh 2 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(1)" data-aos="zoom-in" data-aos-delay="100">
-            <img src="images/story-5.jpg" alt="Ảnh cưới 2" class="w-full h-auto rounded-lg object-cover">
+            <img src="images/anh-cuoi-2.jpg" alt="Ảnh cưới 2"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
@@ -1003,9 +1082,8 @@
           <!-- Ảnh 3 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(2)" data-aos="zoom-in" data-aos-delay="150">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80"
-              alt="Ảnh cưới 3"
-              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <img src="images/anh-cuoi-3.jpg" alt="Ảnh cưới 3"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
@@ -1015,9 +1093,8 @@
           <!-- Ảnh 4 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(3)" data-aos="zoom-in" data-aos-delay="200">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80"
-              alt="Ảnh cưới 4"
-              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <img src="images/anh-cuoi-4.jpg" alt="Ảnh cưới 4"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
@@ -1027,9 +1104,8 @@
           <!-- Ảnh 5 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(4)" data-aos="zoom-in" data-aos-delay="250">
-            <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80"
-              alt="Ảnh cưới 5"
-              class="w-full h-52 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-700">
+            <img src="images/anh-cuoi-5.jpg" alt="Ảnh cưới 5"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
               <i class="fa-regular fa-heart"></i>
@@ -1040,8 +1116,7 @@
           <div
             class="col-span-2 relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(5)" data-aos="zoom-in" data-aos-delay="300">
-            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1000&q=80"
-              alt="Ảnh cưới 6"
+            <img src="images/anh-cuoi-6.jpg" alt="Ảnh cưới 6"
               class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
             <div
               class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -1053,8 +1128,7 @@
           <!-- Ảnh 7 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(6)" data-aos="zoom-in" data-aos-delay="350">
-            <img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=600&q=80"
-              alt="Ảnh cưới 7"
+            <img src="images/anh-cuoi-7.jpg" alt="Ảnh cưới 7"
               class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">
@@ -1065,8 +1139,7 @@
           <!-- Ảnh 8 -->
           <div class="relative rounded-3xl overflow-hidden group cursor-pointer border border-white shadow-card"
             onclick="openLightbox(7)" data-aos="zoom-in" data-aos-delay="400">
-            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80"
-              alt="Ảnh cưới 8"
+            <img src="images/anh-cuoi-8.jpg" alt="Ảnh cưới 8"
               class="w-full h-52 sm:h-64 object-cover group-hover:scale-105 transition-transform duration-700">
             <div
               class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white text-xl">

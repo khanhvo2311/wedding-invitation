@@ -28,35 +28,35 @@ const WEDDING_CONFIG = {
    ========================================================================== */
 const GALLERY_IMAGES = [
   {
-    url: "images/gallery-1.jpg",
+    url: "images/anh-cuoi-1.jpg",
     caption: "Lời hẹn ước trăm năm - Hoàng hôn ngọt ngào"
   },
   {
-    url: "images/gallery-2.jpg",
+    url: "images/anh-cuoi-2.jpg",
     caption: "Nụ cười rạng rỡ trong ngày vui trọng đại"
   },
   {
-    url: "images/gallery-3.jpg",
+    url: "images/anh-cuoi-3.jpg",
     caption: "Khoảnh khắc dịu dàng bên nhau"
   },
   {
-    url: "images/gallery-4.jpg",
+    url: "images/anh-cuoi-4.jpg",
     caption: "Cùng nhau ngắm nhìn tương lai phía trước"
   },
   {
-    url: "images/gallery-5.jpg",
+    url: "images/anh-cuoi-5.jpg",
     caption: "Chiếc váy cưới trắng tinh khôi và nụ cười hạnh phúc"
   },
   {
-    url: "images/gallery-6.jpg",
+    url: "images/anh-cuoi-6.jpg",
     caption: "Nắm tay em đi qua mọi cung đường yêu thương"
   },
   {
-    url: "images/gallery-7.jpg",
+    url: "images/anh-cuoi-7.jpg",
     caption: "Góc phố quen - Nơi bắt đầu một câu chuyện đẹp"
   },
   {
-    url: "images/gallery-8.jpg",
+    url: "images/anh-cuoi-8.jpg",
     caption: "Và chúng mình sẽ luôn mỉm cười như ngày hôm nay"
   }
 ];
@@ -218,10 +218,10 @@ function initPetalsCanvas() {
    ========================================================================== */
 function initAudioPlayer() {
   const bgMusic = document.getElementById("bg-music");
-  const btn     = document.getElementById("music-toggle-btn");
-  const disc    = document.getElementById("music-disc-spin");
-  const icon    = document.getElementById("music-icon");
-  const text    = document.getElementById("music-status-text");
+  const btn = document.getElementById("music-toggle-btn");
+  const disc = document.getElementById("music-disc-spin");
+  const icon = document.getElementById("music-icon");
+  const text = document.getElementById("music-status-text");
 
   if (!bgMusic || !btn) return;
 
@@ -275,7 +275,7 @@ function initAudioPlayer() {
     if (!isPlaying) {
       bgMusic.play()
         .then(() => updateUI(true))
-        .catch(() => {});
+        .catch(() => { });
     }
     // Gỡ listener sau lần đầu tiên
     ["click", "scroll", "touchstart"].forEach(evt =>
@@ -394,18 +394,18 @@ window.addEventListener("click", (e) => {
 /* ==========================================================================
    6.5. HỘP LIÊN HỆ THIẾT KẾ THIỆP (CONTACT MODAL)
    ========================================================================== */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const contactModal = document.getElementById('contact-modal');
   const openBtns = [
-    document.getElementById('contact-nav-btn'), 
-    document.getElementById('contact-mobile-nav-btn'), 
+    document.getElementById('contact-nav-btn'),
+    document.getElementById('contact-mobile-nav-btn'),
     document.getElementById('contact-footer-btn')
   ];
   const closeBtn = document.getElementById('close-contact-modal');
 
   openBtns.forEach(btn => {
     if (btn) {
-      btn.addEventListener('click', function(e) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
         if (contactModal) {
           contactModal.classList.remove('hidden');
@@ -416,14 +416,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', function() {
+    closeBtn.addEventListener('click', function () {
       contactModal.classList.add('hidden');
       contactModal.classList.remove('flex');
     });
   }
 
   if (contactModal) {
-    contactModal.addEventListener('click', function(e) {
+    contactModal.addEventListener('click', function (e) {
       if (e.target === contactModal) {
         contactModal.classList.add('hidden');
         contactModal.classList.remove('flex');
@@ -530,7 +530,7 @@ function renderWishes() {
   feed.innerHTML = list.map((item) => {
     // Lấy ký tự đầu tiên của tên làm Avatar
     const initial = (item.name || "K").trim().charAt(0).toUpperCase();
-    const eventBadges = Array.isArray(item.events) && item.events.length > 0 
+    const eventBadges = Array.isArray(item.events) && item.events.length > 0
       ? item.events.map(ev => `<span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-sageLight text-sageDark font-medium mr-1"><i class="fa-solid fa-location-dot text-[9px] mr-1"></i>${escapeHTML(ev)}</span>`).join("")
       : "";
     return `
@@ -602,50 +602,50 @@ function handleRSVPSubmit(event) {
     },
     body: JSON.stringify(payload)
   })
-  .then(() => {
-    // Vẫn lưu vào localstorage để hiển thị trên web
-    const newWish = {
-      name: name,
-      side: side,
-      count: count,
-      events: selectedEvents.length > 0 ? selectedEvents : ["Chưa chọn địa điểm"],
-      wishes: wishes,
-      time: "Vừa xong"
-    };
+    .then(() => {
+      // Vẫn lưu vào localstorage để hiển thị trên web
+      const newWish = {
+        name: name,
+        side: side,
+        count: count,
+        events: selectedEvents.length > 0 ? selectedEvents : ["Chưa chọn địa điểm"],
+        wishes: wishes,
+        time: "Vừa xong"
+      };
 
-    const currentList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    currentList.unshift(newWish);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
+      const currentList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      currentList.unshift(newWish);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
 
-    // Bắn pháo hoa giấy chúc mừng (Confetti)
-    if (typeof confetti === "function") {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#D4A373", "#C5A880", "#8F9779", "#F7F3EB"]
-      });
-    }
+      // Bắn pháo hoa giấy chúc mừng (Confetti)
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#D4A373", "#C5A880", "#8F9779", "#F7F3EB"]
+        });
+      }
 
-    showToast("Cảm ơn bạn!", "Cảm ơn bạn đã xác nhận tham dự!");
-    document.getElementById("rsvp-form").reset();
-    renderWishes();
-  })
-  .catch(error => {
-    console.error("Lỗi khi gửi form:", error);
-    showToast("Có lỗi xảy ra", "Vui lòng thử lại sau.");
-  })
-  .finally(() => {
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Xác Nhận & Lời Chúc';
-    }
-  });
+      showToast("Cảm ơn bạn!", "Cảm ơn bạn đã xác nhận tham dự!");
+      document.getElementById("rsvp-form").reset();
+      renderWishes();
+    })
+    .catch(error => {
+      console.error("Lỗi khi gửi form:", error);
+      showToast("Có lỗi xảy ra", "Vui lòng thử lại sau.");
+    })
+    .finally(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Gửi Xác Nhận & Lời Chúc';
+      }
+    });
 }
 
 function escapeHTML(str) {
   if (!str) return "";
-  return str.replace(/[&<>'"]/g, 
+  return str.replace(/[&<>'"]/g,
     tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
   );
 }
@@ -699,7 +699,7 @@ function addToCalendar(eventType) {
 
   // Mở Google Calendar link trực tiếp
   const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
-  
+
   window.open(googleCalUrl, "_blank");
   showToast("Đã mở lịch", "Đang chuyển tiếp đến ứng dụng Lịch của bạn...");
 }
@@ -748,12 +748,12 @@ function initWeddingCover() {
       bgMusic.play()
         .then(() => {
           // Cập nhật UI nút nhạc về trạng thái đang phát
-          const btn  = document.getElementById("music-toggle-btn");
+          const btn = document.getElementById("music-toggle-btn");
           const disc = document.getElementById("music-disc-spin");
           const icon = document.getElementById("music-icon");
           const text = document.getElementById("music-status-text");
 
-          if (btn)  btn.classList.add("is-playing");
+          if (btn) btn.classList.add("is-playing");
           if (disc) disc.classList.remove("spin-paused");
           if (icon) icon.className = "fa-solid fa-compact-disc music-note-icon";
           if (text) text.textContent = "Đang phát nhạc";
