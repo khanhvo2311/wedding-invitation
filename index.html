@@ -1275,13 +1275,42 @@
             <i class="fa-regular fa-comment-heart text-roseGold"></i> Sổ Lưu Bút Yêu Thương
           </h3>
           <span id="wishes-count"
-            class="text-xs uppercase tracking-wider text-slateMuted bg-warmBeige px-3 py-1 rounded-full">0 lời
-            chúc</span>
+            class="text-xs uppercase tracking-wider text-slateMuted bg-warmBeige px-3 py-1 rounded-full">Đang tải...</span>
         </div>
 
-        <!-- Danh sách lời chúc hiển thị từ LocalStorage -->
+        <!-- Template mẫu thẻ lời chúc chuẩn (chuẩn UI/UX thiệp cưới) -->
+        <template id="wish-card-template">
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-beigeLight shadow-sm flex items-start gap-4 hover:border-champagne/40 transition-colors">
+            <div class="wish-avatar w-10 h-10 rounded-full bg-warmBeige text-champagneDark font-bold flex items-center justify-center flex-shrink-0 border border-champagne/30 text-sm shadow-sm">
+              K
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                <h4 class="wish-name font-serif font-bold text-charcoal text-sm sm:text-base">Tên khách mời</h4>
+                <span class="wish-time text-[11px] text-slateMuted flex items-center gap-1">
+                  <i class="fa-regular fa-clock text-[10px] text-champagne"></i>
+                  <span class="wish-time-text">13/10/2026 10:03:27</span>
+                </span>
+              </div>
+              <div class="wish-tag-wrap flex flex-wrap items-center gap-1 mb-2">
+                <span class="wish-tag inline-block text-[10px] px-2 py-0.5 rounded-full bg-warmBeige text-champagneDark font-medium">
+                  <i class="fa-solid fa-heart text-[8px] mr-1 text-roseGold"></i>Khách mời chúc phúc
+                </span>
+              </div>
+              <p class="wish-message text-sm text-slateMuted leading-relaxed whitespace-pre-line">Lời chúc yêu thương...</p>
+            </div>
+          </div>
+        </template>
+
+        <!-- Danh sách lời chúc hiển thị từ API -->
         <div id="wishes-feed" class="space-y-4 max-h-[480px] overflow-y-auto pr-2 custom-scrollbar">
-          <!-- Các lời chúc sẽ được JavaScript nạp vào đây -->
+          <!-- Trạng thái đang tải ban đầu (Loading State) -->
+          <div id="wishes-loading" class="text-center py-10 text-slateMuted flex flex-col items-center justify-center gap-2.5">
+            <div class="w-10 h-10 rounded-full bg-warmBeige text-champagneDark flex items-center justify-center border border-champagne/30 animate-spin">
+              <i class="fa-solid fa-circle-notch text-lg"></i>
+            </div>
+            <p class="text-xs uppercase tracking-wider text-champagneDark font-medium">Đang tải lời chúc từ khách mời...</p>
+          </div>
         </div>
       </div>
 

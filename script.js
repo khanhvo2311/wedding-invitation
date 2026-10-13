@@ -19,7 +19,10 @@ const WEDDING_CONFIG = {
 
   // 4. Nhạc nền lãng mạn (Link MP3 trực tuyến chất lượng cao)
   // Bạn có thể thay bằng file mp3 của riêng mình hoặc để nguyên bản nhạc piano lãng mạn này
-  musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-piano-112186.mp3"
+  musicUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-piano-112186.mp3",
+
+  // 5. API danh sách lời chúc từ khách mời (Google Sheets Apps Script)
+  wishesApiUrl: "https://script.google.com/macros/s/AKfycbwGxKHBTKtrr1kmOle3N--rPlbw3dbef3wt6uLP0ossGeKPVRDAXD6ddwc_z-7MUx4Z/exec"
 };
 
 /* ==========================================================================
@@ -470,90 +473,201 @@ function showCopySuccess(btnElement) {
 }
 
 /* ==========================================================================
-   7. XÁC NHẬN THAM DỰ (FORM RSVP) & SỔ LƯU BÚT LOCALSTORAGE
+   7. XÁC NHẬN THAM DỰ (FORM RSVP) & SỔ LƯU BÚT LỜI CHÚC (API GOOGLE SHEETS)
    ========================================================================== */
 const STORAGE_KEY = "wedding_wishes_v3_mocchau_muine";
 
-// Dữ liệu lời chúc mẫu ban đầu để sổ lưu bút luôn ấm áp
-const DEFAULT_WISHES = [
-  {
-    name: "Phương Linh & Hoàng Nam",
-    side: "Bạn chung cả hai",
-    events: ["Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn La)"],
-    wishes: "Chúc hai bạn trăm năm hạnh phúc, răng long đầu bạc và luôn yêu thương nhau như ngày đầu nhé!",
-    time: "2 giờ trước"
-  },
-  {
-    name: "Bác Tuấn (Họ Nhà Gái)",
-    side: "Nhà Gái (Thị Trang)",
-    events: ["Tiệc Nhà Gái (Lễ Vu Quy - Mộc Châu, Sơn La)"],
-    wishes: "Chúc mừng hạnh phúc hai cháu Khánh & Trang. Chúc gia đình nhỏ luôn rộn rã tiếng cười và ngập tràn niềm vui nơi cao nguyên Mộc Châu!",
-    time: "Hôm qua"
-  },
-  {
-    name: "Anh Đức (CLB Nhiếp Ảnh)",
-    side: "Nhà Trai (Quốc Khánh)",
-    events: ["Tiệc Nhà Trai (Lễ Cưới - Mũi Né, Lâm Đồng)"],
-    wishes: "Hẹn gặp lại hai bạn tại Mũi Né nhé! Chúc chú rể bảnh bao của chúng ta luôn hạnh phúc viên mãn bên người bạn đời tuyệt vời!",
-    time: "2 ngày trước"
-  }
-];
+// Bộ nhớ cache tạm thời danh sách lời chúc
+let currentWishesList = [];
 
-function initRSVPFeed() {
-  let stored = localStorage.getItem(STORAGE_KEY);
-  if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_WISHES));
+// Hàm định dạng ngày giờ gửi lời chúc trang nhã
+function formatWishTime(timeStr) {
+  if (!timeStr) return "Vừa xong";
+
+  const str = String(timeStr).trim();
+
+  // Kiểm tra nếu là dạng DD/MM/YYYY hoặc DD/MM/YYYY HH:mm:ss
+  const vnMatch = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);
+  if (vnMatch) {
+    const [, d, m, y, h, min] = vnMatch;
+    return h
+      ? `${h.padStart(2, "0")}:${min.padStart(2, "0")} • ${d.padStart(2, "0")}/${m.padStart(2, "0")}/${y}`
+      : `${d.padStart(2, "0")}/${m.padStart(2, "0")}/${y}`;
   }
-  renderWishes();
+
+  // Thử parse Date chuẩn Javascript
+  const parsedDate = new Date(str);
+  if (!isNaN(parsedDate.getTime())) {
+    const hours = String(parsedDate.getHours()).padStart(2, "0");
+    const minutes = String(parsedDate.getMinutes()).padStart(2, "0");
+    const day = String(parsedDate.getDate()).padStart(2, "0");
+    const month = String(parsedDate.getMonth() + 1).padStart(2, "0");
+    const year = parsedDate.getFullYear();
+    return `${hours}:${minutes} • ${day}/${month}/${year}`;
+  }
+
+  // Fallback loại bỏ hậu tố múi giờ dài dòng nếu có
+  return str.replace(/\s*\(.*?\)\s*/g, "").replace(/GMT\+\d{4}/, "").trim();
 }
 
-function renderWishes() {
+// Khởi tạo sổ lưu bút & nạp dữ liệu từ API
+function initRSVPFeed() {
+  fetchWishesFromAPI();
+}
+
+// Gọi API Google Sheets nạp danh sách lời chúc
+async function fetchWishesFromAPI() {
+  const feed = document.getElementById("wishes-feed");
+  const countEl = document.getElementById("wishes-count");
+
+  // Hiển thị trạng thái đang tải nếu danh sách hiện đang trống
+  if (currentWishesList.length === 0) {
+    if (countEl) countEl.innerText = "Đang tải...";
+    if (feed) {
+      feed.innerHTML = `
+        <div id="wishes-loading" class="text-center py-10 text-slateMuted flex flex-col items-center justify-center gap-2.5">
+          <div class="w-10 h-10 rounded-full bg-warmBeige text-champagneDark flex items-center justify-center border border-champagne/30 animate-spin">
+            <i class="fa-solid fa-circle-notch text-lg"></i>
+          </div>
+          <p class="text-xs uppercase tracking-wider text-champagneDark font-medium">Đang tải lời chúc từ khách mời...</p>
+        </div>
+      `;
+    }
+  }
+
+  try {
+    const apiUrl = (typeof WEDDING_CONFIG !== "undefined" && WEDDING_CONFIG.wishesApiUrl)
+      ? WEDDING_CONFIG.wishesApiUrl
+      : "https://script.google.com/macros/s/AKfycbwGxKHBTKtrr1kmOle3N--rPlbw3dbef3wt6uLP0ossGeKPVRDAXD6ddwc_z-7MUx4Z/exec";
+
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const list = Array.isArray(data) ? data : (data.value || []);
+
+    // Đảo ngược mảng để lời chúc mới nhất (dòng cuối trên Google Sheet) xuất hiện ở trên cùng
+    currentWishesList = [...list].reverse();
+
+    // Lưu vào localStorage làm bộ nhớ đệm dự phòng
+    try {
+      localStorage.setItem("wedding_api_wishes_cache", JSON.stringify(currentWishesList));
+    } catch (e) {}
+
+    renderWishes(currentWishesList);
+  } catch (error) {
+    console.warn("Lỗi khi tải lời chúc từ API, chuyển sang dùng bộ nhớ đệm:", error);
+
+    // Sử dụng bộ nhớ đệm nếu có
+    const cached = JSON.parse(localStorage.getItem("wedding_api_wishes_cache") || "[]");
+    if (cached && cached.length > 0) {
+      currentWishesList = cached;
+      renderWishes(currentWishesList);
+    } else {
+      if (countEl) countEl.innerText = "0 lời chúc";
+      if (feed) {
+        feed.innerHTML = `
+          <div class="text-center py-8 px-4 bg-white/70 rounded-2xl border border-beigeLight text-slateMuted text-sm space-y-2">
+            <p class="text-charcoal font-medium">Chưa thể kết nối đến máy chủ lời chúc.</p>
+            <p class="text-xs text-slateMuted">Bạn vẫn có thể gửi lời chúc qua biểu mẫu bên trên nhé!</p>
+            <button onclick="fetchWishesFromAPI()" class="mt-2 px-4 py-1.5 text-xs rounded-full bg-warmBeige text-champagneDark hover:bg-champagne hover:text-white transition-all font-medium inline-flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-rotate-right"></i> Thử tải lại
+            </button>
+          </div>
+        `;
+      }
+    }
+  }
+}
+
+// Tạo DOM Element cho từng thẻ lời chúc bám sát 100% template và style thiệp cưới
+function createWishCardElement(item) {
+  const initial = (item.name || "K").trim().charAt(0).toUpperCase();
+  const name = item.name || "Khách mời ẩn danh";
+  const formattedTime = formatWishTime(item.time);
+  const message = item.message || item.wishes || "";
+  const side = item.side || item.weddingParty || "Khách mời chúc phúc";
+
+  const template = document.getElementById("wish-card-template");
+  if (template && template.content && template.content.firstElementChild) {
+    const clone = template.content.firstElementChild.cloneNode(true);
+    const avatarEl = clone.querySelector(".wish-avatar");
+    const nameEl = clone.querySelector(".wish-name");
+    const timeEl = clone.querySelector(".wish-time-text");
+    const tagEl = clone.querySelector(".wish-tag");
+    const msgEl = clone.querySelector(".wish-message");
+
+    if (avatarEl) avatarEl.textContent = initial;
+    if (nameEl) nameEl.textContent = name;
+    if (timeEl) timeEl.textContent = formattedTime;
+    if (tagEl) {
+      tagEl.innerHTML = `<i class="fa-solid fa-heart text-[8px] mr-1 text-roseGold"></i>${escapeHTML(side)}`;
+    }
+    if (msgEl) msgEl.textContent = message;
+    return clone;
+  }
+
+  // Fallback cấu trúc thẻ đồng bộ
+  const card = document.createElement("div");
+  card.className = "bg-white p-4 sm:p-5 rounded-2xl border border-beigeLight shadow-sm flex items-start gap-4 hover:border-champagne/40 transition-colors";
+  card.innerHTML = `
+    <div class="wish-avatar w-10 h-10 rounded-full bg-warmBeige text-champagneDark font-bold flex items-center justify-center flex-shrink-0 border border-champagne/30 text-sm shadow-sm">
+      ${escapeHTML(initial)}
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+        <h4 class="wish-name font-serif font-bold text-charcoal text-sm sm:text-base">${escapeHTML(name)}</h4>
+        <span class="wish-time text-[11px] text-slateMuted flex items-center gap-1">
+          <i class="fa-regular fa-clock text-[10px] text-champagne"></i>
+          <span class="wish-time-text">${escapeHTML(formattedTime)}</span>
+        </span>
+      </div>
+      <div class="wish-tag-wrap flex flex-wrap items-center gap-1 mb-2">
+        <span class="wish-tag inline-block text-[10px] px-2 py-0.5 rounded-full bg-warmBeige text-champagneDark font-medium">
+          <i class="fa-solid fa-heart text-[8px] mr-1 text-roseGold"></i>${escapeHTML(side)}
+        </span>
+      </div>
+      <p class="wish-message text-sm text-slateMuted leading-relaxed whitespace-pre-line">${escapeHTML(message)}</p>
+    </div>
+  `;
+  return card;
+}
+
+// Render toàn bộ danh sách thẻ lời chúc vào DOM
+function renderWishes(list = currentWishesList) {
   const feed = document.getElementById("wishes-feed");
   const countEl = document.getElementById("wishes-count");
   if (!feed) return;
-
-  const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
   if (countEl) {
     countEl.innerText = `${list.length} lời chúc`;
   }
 
-  if (list.length === 0) {
+  if (!list || list.length === 0) {
     feed.innerHTML = `
-      <div class="text-center py-8 text-slateMuted italic text-sm">
+      <div class="text-center py-10 px-4 bg-white/60 rounded-2xl border border-beigeLight text-slateMuted italic text-sm">
+        <i class="fa-regular fa-comment-dots text-2xl text-champagne/60 block mb-2"></i>
         Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc phúc đến cô dâu & chú rể nhé!
       </div>
     `;
     return;
   }
 
-  feed.innerHTML = list.map((item) => {
-    // Lấy ký tự đầu tiên của tên làm Avatar
-    const initial = (item.name || "K").trim().charAt(0).toUpperCase();
-    const eventBadges = Array.isArray(item.events) && item.events.length > 0
-      ? item.events.map(ev => `<span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-sageLight text-sageDark font-medium mr-1"><i class="fa-solid fa-location-dot text-[9px] mr-1"></i>${escapeHTML(ev)}</span>`).join("")
-      : "";
-    return `
-      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-beigeLight shadow-sm flex items-start gap-4 hover:border-champagne/40 transition-colors">
-        <div class="w-10 h-10 rounded-full bg-warmBeige text-champagneDark font-bold flex items-center justify-center flex-shrink-0 border border-champagne/30 text-sm">
-          ${initial}
-        </div>
-        <div class="flex-1 min-w-0">
-          <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
-            <h4 class="font-serif font-bold text-charcoal text-sm">${escapeHTML(item.name)}</h4>
-            <span class="text-[11px] text-slateMuted">${escapeHTML(item.time || "Vừa xong")}</span>
-          </div>
-          <div class="flex flex-wrap items-center gap-1 mb-2">
-            <span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-warmBeige text-champagneDark font-medium">
-              ${escapeHTML(item.side || "Khách mời")}
-            </span>
-            ${eventBadges}
-          </div>
-          <p class="text-sm text-slateMuted leading-relaxed">${escapeHTML(item.wishes)}</p>
-        </div>
-      </div>
-    `;
-  }).join("");
+  feed.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
+  list.forEach(item => {
+    const cardEl = createWishCardElement(item);
+    fragment.appendChild(cardEl);
+  });
+
+  feed.appendChild(fragment);
 }
 
 function handleRSVPSubmit(event) {
@@ -603,19 +717,19 @@ function handleRSVPSubmit(event) {
     body: JSON.stringify(payload)
   })
     .then(() => {
-      // Vẫn lưu vào localstorage để hiển thị trên web
+      // Đưa lời chúc mới lên đầu danh sách để hiển thị ngay tức thì (Optimistic UI)
       const newWish = {
         name: name,
         side: side,
         count: count,
         events: selectedEvents.length > 0 ? selectedEvents : ["Chưa chọn địa điểm"],
+        message: wishes,
         wishes: wishes,
         time: "Vừa xong"
       };
 
-      const currentList = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      currentList.unshift(newWish);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
+      currentWishesList.unshift(newWish);
+      renderWishes(currentWishesList);
 
       // Bắn pháo hoa giấy chúc mừng (Confetti)
       if (typeof confetti === "function") {
@@ -627,9 +741,19 @@ function handleRSVPSubmit(event) {
         });
       }
 
-      showToast("Cảm ơn bạn!", "Cảm ơn bạn đã xác nhận tham dự!");
+      showToast("Cảm ơn bạn!", "Cảm ơn bạn đã xác nhận tham dự và gửi lời chúc phúc!");
       document.getElementById("rsvp-form").reset();
-      renderWishes();
+
+      // Cuộn êm ái lên đầu danh sách lời chúc
+      const feed = document.getElementById("wishes-feed");
+      if (feed) {
+        feed.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Sau 3.5 giây, tự động gọi API nạp lại dữ liệu đồng bộ với Google Sheets
+      setTimeout(() => {
+        fetchWishesFromAPI();
+      }, 3500);
     })
     .catch(error => {
       console.error("Lỗi khi gửi form:", error);
