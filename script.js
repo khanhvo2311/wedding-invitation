@@ -32,35 +32,35 @@ const WEDDING_CONFIG = {
 const GALLERY_IMAGES = [
   {
     url: "images/anh-cuoi-1.jpg",
-    caption: "Lời hẹn ước trăm năm - Hoàng hôn ngọt ngào"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-2.jpg",
-    caption: "Nụ cười rạng rỡ trong ngày vui trọng đại"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-3.jpg",
-    caption: "Khoảnh khắc dịu dàng bên nhau"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-4.jpg",
-    caption: "Cùng nhau ngắm nhìn tương lai phía trước"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-5.jpg",
-    caption: "Chiếc váy cưới trắng tinh khôi và nụ cười hạnh phúc"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-6.jpg",
-    caption: "Nắm tay em đi qua mọi cung đường yêu thương"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-7.jpg",
-    caption: "Góc phố quen - Nơi bắt đầu một câu chuyện đẹp"
+    caption: ""
   },
   {
     url: "images/anh-cuoi-8.jpg",
-    caption: "Và chúng mình sẽ luôn mỉm cười như ngày hôm nay"
+    caption: ""
   }
 ];
 
@@ -558,7 +558,7 @@ async function fetchWishesFromAPI() {
     // Lưu vào localStorage làm bộ nhớ đệm dự phòng
     try {
       localStorage.setItem("wedding_api_wishes_cache", JSON.stringify(currentWishesList));
-    } catch (e) {}
+    } catch (e) { }
 
     renderWishes(currentWishesList);
   } catch (error) {
